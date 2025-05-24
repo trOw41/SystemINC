@@ -29,6 +29,7 @@ Partial Class Form1
         BeendenToolStripMenuItem = New ToolStripMenuItem()
         InfoToolStripMenuItem = New ToolStripMenuItem()
         HilfeToolStripMenuItem = New ToolStripMenuItem()
+        ÜberToolStripMenuItem = New ToolStripMenuItem()
         Panel1 = New Panel()
         Button4 = New Button()
         Button3 = New Button()
@@ -62,7 +63,7 @@ Partial Class Form1
         ' MenuStrip1
         ' 
         resources.ApplyResources(MenuStrip1, "MenuStrip1")
-        MenuStrip1.BackColor = SystemColors.InactiveCaption
+        MenuStrip1.BackColor = Color.Lavender
         ErrorProvider1.SetError(MenuStrip1, resources.GetString("MenuStrip1.Error"))
         MenuStrip1.GripMargin = New Padding(0)
         HelpProvider1.SetHelpKeyword(MenuStrip1, resources.GetString("MenuStrip1.HelpKeyword"))
@@ -92,7 +93,7 @@ Partial Class Form1
         ' InfoToolStripMenuItem
         ' 
         resources.ApplyResources(InfoToolStripMenuItem, "InfoToolStripMenuItem")
-        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {HilfeToolStripMenuItem})
+        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {HilfeToolStripMenuItem, ÜberToolStripMenuItem})
         InfoToolStripMenuItem.Image = My.Resources.Resources._011_warning
         InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
         ' 
@@ -101,6 +102,12 @@ Partial Class Form1
         resources.ApplyResources(HilfeToolStripMenuItem, "HilfeToolStripMenuItem")
         HilfeToolStripMenuItem.Image = My.Resources.Resources._002_tablet
         HilfeToolStripMenuItem.Name = "HilfeToolStripMenuItem"
+        ' 
+        ' ÜberToolStripMenuItem
+        ' 
+        resources.ApplyResources(ÜberToolStripMenuItem, "ÜberToolStripMenuItem")
+        ÜberToolStripMenuItem.Image = My.Resources.Resources._009_technology
+        ÜberToolStripMenuItem.Name = "ÜberToolStripMenuItem"
         ' 
         ' Panel1
         ' 
@@ -230,7 +237,7 @@ Partial Class Form1
         HDDLabel.BackColor = Color.Transparent
         ErrorProvider1.SetError(HDDLabel, resources.GetString("HDDLabel.Error"))
         HDDLabel.FlatStyle = FlatStyle.Flat
-        HDDLabel.ForeColor = Color.LawnGreen
+        HDDLabel.ForeColor = Color.LightBlue
         HelpProvider1.SetHelpKeyword(HDDLabel, resources.GetString("HDDLabel.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(HDDLabel, resources.GetObject("HDDLabel.HelpNavigator"))
         HelpProvider1.SetHelpString(HDDLabel, resources.GetString("HDDLabel.HelpString"))
@@ -244,7 +251,7 @@ Partial Class Form1
         resources.ApplyResources(HDDBox, "HDDBox")
         HDDBox.BackColor = SystemColors.ActiveBorder
         ErrorProvider1.SetError(HDDBox, resources.GetString("HDDBox.Error"))
-        HDDBox.ForeColor = Color.LawnGreen
+        HDDBox.ForeColor = SystemColors.MenuText
         HDDBox.FormattingEnabled = True
         HelpProvider1.SetHelpKeyword(HDDBox, resources.GetString("HDDBox.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(HDDBox, resources.GetObject("HDDBox.HelpNavigator"))
@@ -437,4 +444,5 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents ÜberToolStripMenuItem As ToolStripMenuItem
 End Class

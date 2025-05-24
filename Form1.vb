@@ -1,20 +1,12 @@
-﻿Imports System.Diagnostics ' Für Process-Klasse
+﻿Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
-Imports System.Text      ' Für StringBuilder und Encoding
+Imports System.Text
 
 Public Class Form1
 
-    ' Hier kommt der gesamte vorherige Code für SystemView und HDDBox etc.
-    ' ... (Vom vorherigen Code übernehmen) ...
-
-    ' NEUE Variablen für die Shell-Interaktion
-    Private cmdProcess As Process ' Der Prozess für cmd.exe
-    Private isShellRunning As Boolean = False ' Flag, ob die Shell läuft
-
-    ' ###############################################################
-    ' NEUER CODE FÜR SHELL-INTEGRATION - KORRIGIERT FÜR THREAD-SICHERHEIT
-    ' ###############################################################
+    Private cmdProcess As Process
+    Private isShellRunning As Boolean = False
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, Button2.Click, Button3.Click, Button4.Click
         If Not isShellRunning Then
@@ -511,6 +503,13 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub ÜberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜberToolStripMenuItem.Click
+        About.Show()
+    End Sub
+
+    Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HilfeToolStripMenuItem.Click
+        FormFAQ.Show()
+    End Sub
 End Class
 
 

@@ -258,8 +258,14 @@
   <data name="HddBar1.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 14</value>
   </data>
+  <data name="HDDLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Bahnschrift SemiBold SemiConden, 11.25pt, style=Bold</value>
+  </data>
   <data name="HDDLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 9</value>
+  </data>
+  <data name="HDDLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 18</value>
   </data>
   <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>485, 10</value>
@@ -268,7 +274,13 @@
     <value>170, 56</value>
   </data>
   <data name="HDDBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Bahnschrift Condensed, 12pt</value>
+    <value>Bahnschrift SemiBold SemiConden, 12pt, style=Bold</value>
+  </data>
+  <data name="HDDBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>Topic</value>
+  </data>
+  <data name="HDDBox.HelpString" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="HDDBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>487, 73</value>
@@ -3673,9 +3685,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>SysInc</value>
   </data>
-  <data name="BeendenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 30</value>
-  </data>
   <data name="MenüToolStripMenuItem.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
@@ -3684,6 +3693,9 @@
   </data>
   <data name="HilfeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 30</value>
+  </data>
+  <data name="ÜberToolStripMenuItem.Text" xml:space="preserve">
+    <value>Über..</value>
   </data>
   <data name="InfoToolStripMenuItem.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
