@@ -35,25 +35,25 @@ Partial Class Form1
         Button3 = New Button()
         Button2 = New Button()
         Button1 = New Button()
-        Console = New RichTextBox()
         Panel2 = New Panel()
         HddBar1 = New ProgressBar()
         HDDLabel = New Label()
         HDDBox = New ListBox()
         SystemView = New ListView()
-        TableLayoutPanel1 = New TableLayoutPanel()
+        Console = New RichTextBox()
+        TP1 = New TableLayoutPanel()
         PictureBox1 = New PictureBox()
         PictureBox2 = New PictureBox()
         PictureBox3 = New PictureBox()
         Label1 = New Label()
-        Label2 = New Label()
         Label3 = New Label()
+        Label2 = New Label()
         HelpProvider1 = New HelpProvider()
         ErrorProvider1 = New ErrorProvider(components)
         MenuStrip1.SuspendLayout()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
-        TableLayoutPanel1.SuspendLayout()
+        TP1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
@@ -118,7 +118,6 @@ Partial Class Form1
         Panel1.Controls.Add(Button3)
         Panel1.Controls.Add(Button2)
         Panel1.Controls.Add(Button1)
-        Panel1.Controls.Add(Console)
         Panel1.Controls.Add(Panel2)
         Panel1.Controls.Add(HDDBox)
         Panel1.Controls.Add(SystemView)
@@ -186,20 +185,6 @@ Partial Class Form1
         Button1.Name = "Button1"
         HelpProvider1.SetShowHelp(Button1, resources.GetObject("Button1.ShowHelp"))
         Button1.UseVisualStyleBackColor = True
-        ' 
-        ' Console
-        ' 
-        resources.ApplyResources(Console, "Console")
-        Console.BackColor = SystemColors.ActiveCaptionText
-        ErrorProvider1.SetError(Console, resources.GetString("Console.Error"))
-        Console.ForeColor = SystemColors.Window
-        HelpProvider1.SetHelpKeyword(Console, resources.GetString("Console.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(Console, resources.GetObject("Console.HelpNavigator"))
-        HelpProvider1.SetHelpString(Console, resources.GetString("Console.HelpString"))
-        ErrorProvider1.SetIconAlignment(Console, resources.GetObject("Console.IconAlignment"))
-        ErrorProvider1.SetIconPadding(Console, resources.GetObject("Console.IconPadding"))
-        Console.Name = "Console"
-        HelpProvider1.SetShowHelp(Console, resources.GetObject("Console.ShowHelp"))
         ' 
         ' Panel2
         ' 
@@ -277,25 +262,40 @@ Partial Class Form1
         HelpProvider1.SetShowHelp(SystemView, resources.GetObject("SystemView.ShowHelp"))
         SystemView.UseCompatibleStateImageBehavior = False
         ' 
-        ' TableLayoutPanel1
+        ' Console
         ' 
-        resources.ApplyResources(TableLayoutPanel1, "TableLayoutPanel1")
-        TableLayoutPanel1.BackColor = Color.AliceBlue
-        TableLayoutPanel1.Controls.Add(PictureBox1, 0, 0)
-        TableLayoutPanel1.Controls.Add(PictureBox2, 1, 0)
-        TableLayoutPanel1.Controls.Add(PictureBox3, 2, 0)
-        TableLayoutPanel1.Controls.Add(Label1, 0, 1)
-        TableLayoutPanel1.Controls.Add(Label2, 1, 1)
-        TableLayoutPanel1.Controls.Add(Label3, 2, 1)
-        ErrorProvider1.SetError(TableLayoutPanel1, resources.GetString("TableLayoutPanel1.Error"))
-        TableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize
-        HelpProvider1.SetHelpKeyword(TableLayoutPanel1, resources.GetString("TableLayoutPanel1.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(TableLayoutPanel1, resources.GetObject("TableLayoutPanel1.HelpNavigator"))
-        HelpProvider1.SetHelpString(TableLayoutPanel1, resources.GetString("TableLayoutPanel1.HelpString"))
-        ErrorProvider1.SetIconAlignment(TableLayoutPanel1, resources.GetObject("TableLayoutPanel1.IconAlignment"))
-        ErrorProvider1.SetIconPadding(TableLayoutPanel1, resources.GetObject("TableLayoutPanel1.IconPadding"))
-        TableLayoutPanel1.Name = "TableLayoutPanel1"
-        HelpProvider1.SetShowHelp(TableLayoutPanel1, resources.GetObject("TableLayoutPanel1.ShowHelp"))
+        resources.ApplyResources(Console, "Console")
+        Console.BackColor = SystemColors.ActiveCaptionText
+        Console.BorderStyle = BorderStyle.FixedSingle
+        ErrorProvider1.SetError(Console, resources.GetString("Console.Error"))
+        Console.ForeColor = SystemColors.Window
+        HelpProvider1.SetHelpKeyword(Console, resources.GetString("Console.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Console, resources.GetObject("Console.HelpNavigator"))
+        HelpProvider1.SetHelpString(Console, resources.GetString("Console.HelpString"))
+        ErrorProvider1.SetIconAlignment(Console, resources.GetObject("Console.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Console, resources.GetObject("Console.IconPadding"))
+        Console.Name = "Console"
+        HelpProvider1.SetShowHelp(Console, resources.GetObject("Console.ShowHelp"))
+        ' 
+        ' TP1
+        ' 
+        resources.ApplyResources(TP1, "TP1")
+        TP1.BackColor = SystemColors.AppWorkspace
+        TP1.Controls.Add(PictureBox2, 1, 0)
+        TP1.Controls.Add(PictureBox3, 2, 0)
+        TP1.Controls.Add(Label1, 0, 1)
+        TP1.Controls.Add(Label3, 2, 1)
+        TP1.Controls.Add(Label2, 1, 1)
+        TP1.Controls.Add(PictureBox1, 0, 0)
+        ErrorProvider1.SetError(TP1, resources.GetString("TP1.Error"))
+        TP1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize
+        HelpProvider1.SetHelpKeyword(TP1, resources.GetString("TP1.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(TP1, resources.GetObject("TP1.HelpNavigator"))
+        HelpProvider1.SetHelpString(TP1, resources.GetString("TP1.HelpString"))
+        ErrorProvider1.SetIconAlignment(TP1, resources.GetObject("TP1.IconAlignment"))
+        ErrorProvider1.SetIconPadding(TP1, resources.GetObject("TP1.IconPadding"))
+        TP1.Name = "TP1"
+        HelpProvider1.SetShowHelp(TP1, resources.GetObject("TP1.ShowHelp"))
         ' 
         ' PictureBox1
         ' 
@@ -351,18 +351,6 @@ Partial Class Form1
         Label1.Name = "Label1"
         HelpProvider1.SetShowHelp(Label1, resources.GetObject("Label1.ShowHelp"))
         ' 
-        ' Label2
-        ' 
-        resources.ApplyResources(Label2, "Label2")
-        ErrorProvider1.SetError(Label2, resources.GetString("Label2.Error"))
-        HelpProvider1.SetHelpKeyword(Label2, resources.GetString("Label2.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(Label2, resources.GetObject("Label2.HelpNavigator"))
-        HelpProvider1.SetHelpString(Label2, resources.GetString("Label2.HelpString"))
-        ErrorProvider1.SetIconAlignment(Label2, resources.GetObject("Label2.IconAlignment"))
-        ErrorProvider1.SetIconPadding(Label2, resources.GetObject("Label2.IconPadding"))
-        Label2.Name = "Label2"
-        HelpProvider1.SetShowHelp(Label2, resources.GetObject("Label2.ShowHelp"))
-        ' 
         ' Label3
         ' 
         resources.ApplyResources(Label3, "Label3")
@@ -374,6 +362,18 @@ Partial Class Form1
         ErrorProvider1.SetIconPadding(Label3, resources.GetObject("Label3.IconPadding"))
         Label3.Name = "Label3"
         HelpProvider1.SetShowHelp(Label3, resources.GetObject("Label3.ShowHelp"))
+        ' 
+        ' Label2
+        ' 
+        resources.ApplyResources(Label2, "Label2")
+        ErrorProvider1.SetError(Label2, resources.GetString("Label2.Error"))
+        HelpProvider1.SetHelpKeyword(Label2, resources.GetString("Label2.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Label2, resources.GetObject("Label2.HelpNavigator"))
+        HelpProvider1.SetHelpString(Label2, resources.GetString("Label2.HelpString"))
+        ErrorProvider1.SetIconAlignment(Label2, resources.GetObject("Label2.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Label2, resources.GetObject("Label2.IconPadding"))
+        Label2.Name = "Label2"
+        HelpProvider1.SetShowHelp(Label2, resources.GetObject("Label2.ShowHelp"))
         ' 
         ' HelpProvider1
         ' 
@@ -389,9 +389,10 @@ Partial Class Form1
         resources.ApplyResources(Me, "$this")
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.DarkGray
-        Controls.Add(TableLayoutPanel1)
+        Controls.Add(Console)
         Controls.Add(Panel1)
         Controls.Add(MenuStrip1)
+        Controls.Add(TP1)
         FormBorderStyle = FormBorderStyle.FixedSingle
         HelpButton = True
         HelpProvider1.SetHelpKeyword(Me, resources.GetString("$this.HelpKeyword"))
@@ -406,8 +407,8 @@ Partial Class Form1
         Panel1.ResumeLayout(False)
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
-        TableLayoutPanel1.ResumeLayout(False)
-        TableLayoutPanel1.PerformLayout()
+        TP1.ResumeLayout(False)
+        TP1.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
@@ -425,7 +426,7 @@ Partial Class Form1
     Friend WithEvents HilfeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
     Friend WithEvents SystemView As ListView
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TP1 As TableLayoutPanel
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents BeendenToolStripMenuItem As ToolStripMenuItem

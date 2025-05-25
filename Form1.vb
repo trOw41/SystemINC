@@ -8,7 +8,7 @@ Public Class Form1
     Private cmdProcess As Process
     Private isShellRunning As Boolean = False
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, Button2.Click, Button3.Click, Button4.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, Button2.Click, Button3.Click
         If Not isShellRunning Then
             StartShell()
             Button1.Text = "Shell beenden"
@@ -16,6 +16,7 @@ Public Class Form1
             StopShell()
             Button1.Text = "Shell starten"
         End If
+
     End Sub
 
     Private Sub StartShell()
@@ -293,7 +294,7 @@ Public Class Form1
         Try
             ' Den ausgewählten Laufwerksnamen extrahieren (z.B. "C:\")
             Dim selectedItemText As String = HDDBox.SelectedItem.ToString()
-            Dim driveName As String = selectedItemText.Substring(0, length:=selectedItemText.IndexOf(" ")) ' Nimmt den Teil vor dem ersten Leerzeichen
+            Dim driveName As String = selectedItemText.Substring(0, length:=selectedItemText.IndexOf(" "c)) ' Nimmt den Teil vor dem ersten Leerzeichen
 
             Dim selectedDrive As New DriveInfo(driveName)
 
@@ -509,6 +510,22 @@ Public Class Form1
 
     Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HilfeToolStripMenuItem.Click
         FormFAQ.Show()
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If TP1.Size.Height = 147 Then
+            Me.Invoke(Sub()
+                          Me.Size = New Drawing.Size(Me.Size.Width, Me.Size.Height + 150)
+                      End Sub)
+        ElseIf TP1.Size.Height = 311 Then
+            Me.Invoke(Sub()
+                          Size = New Drawing.Size(Size.Width, Size.Height - 150)
+                      End Sub)
+        End If
     End Sub
 End Class
 

@@ -261,6 +261,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property discription() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("discription", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property icons8_löschen_144() As System.Drawing.Bitmap
