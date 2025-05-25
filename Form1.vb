@@ -517,14 +517,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If TP1.Size.Height = 147 Then
-            Me.Invoke(Sub()
-                          Me.Size = New Drawing.Size(Me.Size.Width, Me.Size.Height + 150)
-                      End Sub)
-        ElseIf TP1.Size.Height = 311 Then
-            Me.Invoke(Sub()
-                          Size = New Drawing.Size(Size.Width, Size.Height - 150)
-                      End Sub)
+        If Not TP1.Visible = True Then
+            TP1.Visible = True
+        Else
+            TP1.Visible = False
         End If
     End Sub
 End Class

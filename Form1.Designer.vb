@@ -42,21 +42,21 @@ Partial Class Form1
         SystemView = New ListView()
         Console = New RichTextBox()
         TP1 = New TableLayoutPanel()
-        PictureBox1 = New PictureBox()
         PictureBox2 = New PictureBox()
         PictureBox3 = New PictureBox()
         Label1 = New Label()
         Label3 = New Label()
         Label2 = New Label()
+        PictureBox1 = New PictureBox()
         HelpProvider1 = New HelpProvider()
         ErrorProvider1 = New ErrorProvider(components)
         MenuStrip1.SuspendLayout()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
         TP1.SuspendLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -114,6 +114,7 @@ Partial Class Form1
         resources.ApplyResources(Panel1, "Panel1")
         Panel1.BackColor = SystemColors.ControlDark
         Panel1.BorderStyle = BorderStyle.FixedSingle
+        Panel1.Controls.Add(Console)
         Panel1.Controls.Add(Button4)
         Panel1.Controls.Add(Button3)
         Panel1.Controls.Add(Button2)
@@ -297,20 +298,6 @@ Partial Class Form1
         TP1.Name = "TP1"
         HelpProvider1.SetShowHelp(TP1, resources.GetObject("TP1.ShowHelp"))
         ' 
-        ' PictureBox1
-        ' 
-        resources.ApplyResources(PictureBox1, "PictureBox1")
-        ErrorProvider1.SetError(PictureBox1, resources.GetString("PictureBox1.Error"))
-        HelpProvider1.SetHelpKeyword(PictureBox1, resources.GetString("PictureBox1.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(PictureBox1, resources.GetObject("PictureBox1.HelpNavigator"))
-        HelpProvider1.SetHelpString(PictureBox1, resources.GetString("PictureBox1.HelpString"))
-        ErrorProvider1.SetIconAlignment(PictureBox1, resources.GetObject("PictureBox1.IconAlignment"))
-        ErrorProvider1.SetIconPadding(PictureBox1, resources.GetObject("PictureBox1.IconPadding"))
-        PictureBox1.Image = My.Resources.Resources._020_computer_1
-        PictureBox1.Name = "PictureBox1"
-        HelpProvider1.SetShowHelp(PictureBox1, resources.GetObject("PictureBox1.ShowHelp"))
-        PictureBox1.TabStop = False
-        ' 
         ' PictureBox2
         ' 
         resources.ApplyResources(PictureBox2, "PictureBox2")
@@ -375,6 +362,20 @@ Partial Class Form1
         Label2.Name = "Label2"
         HelpProvider1.SetShowHelp(Label2, resources.GetObject("Label2.ShowHelp"))
         ' 
+        ' PictureBox1
+        ' 
+        resources.ApplyResources(PictureBox1, "PictureBox1")
+        ErrorProvider1.SetError(PictureBox1, resources.GetString("PictureBox1.Error"))
+        HelpProvider1.SetHelpKeyword(PictureBox1, resources.GetString("PictureBox1.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(PictureBox1, resources.GetObject("PictureBox1.HelpNavigator"))
+        HelpProvider1.SetHelpString(PictureBox1, resources.GetString("PictureBox1.HelpString"))
+        ErrorProvider1.SetIconAlignment(PictureBox1, resources.GetObject("PictureBox1.IconAlignment"))
+        ErrorProvider1.SetIconPadding(PictureBox1, resources.GetObject("PictureBox1.IconPadding"))
+        PictureBox1.Image = My.Resources.Resources._020_computer_1
+        PictureBox1.Name = "PictureBox1"
+        HelpProvider1.SetShowHelp(PictureBox1, resources.GetObject("PictureBox1.ShowHelp"))
+        PictureBox1.TabStop = False
+        ' 
         ' HelpProvider1
         ' 
         resources.ApplyResources(HelpProvider1, "HelpProvider1")
@@ -389,7 +390,6 @@ Partial Class Form1
         resources.ApplyResources(Me, "$this")
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.DarkGray
-        Controls.Add(Console)
         Controls.Add(Panel1)
         Controls.Add(MenuStrip1)
         Controls.Add(TP1)
@@ -409,9 +409,9 @@ Partial Class Form1
         Panel2.PerformLayout()
         TP1.ResumeLayout(False)
         TP1.PerformLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox2, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()

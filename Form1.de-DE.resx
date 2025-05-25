@@ -122,10 +122,16 @@
     <value>675, 692</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Panel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="Console.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Console.BulletIndent" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -133,22 +139,16 @@
     <value>Lucida Console, 8.25pt, style=Italic</value>
   </data>
   <data name="Console.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 373</value>
+    <value>-1, 10</value>
   </data>
   <data name="Console.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
   <data name="Console.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 265</value>
+    <value>480, 310</value>
   </data>
   <data name="Console.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="Panel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Button4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
