@@ -15,7 +15,24 @@ Public Class Form1
     Private errorList As List(Of String)
     Private ex0 As ErrObject
     Private DateStamp As Date
-
+    ' Diese Indizes müssen mit der Reihenfolge übereinstimmen, in der Sie die Icons in ImageList1 hinzugefügt haben!
+    Private Const ICON_OS As Integer = 0 ' Beispiel: Index für Betriebssystem-Icon
+    Private Const ICON_SYSTEM_TYPE As Integer = 1 ' Beispiel: Index für Systemtyp-Icon
+    Private Const ICON_COMPUTER_NAME As Integer = 2
+    Private Const ICON_USER_NAME As Integer = 3
+    Private Const ICON_DOMAIN_NAME As Integer = 4
+    Private Const ICON_PROCESSOR_COUNT As Integer = 5
+    Private Const ICON_RAM As Integer = 6
+    Private Const ICON_AVAIL_RAM As Integer = 7
+    Private Const ICON_HOSTNAME As Integer = 8
+    Private Const ICON_IP_ADDRESSES As Integer = 9
+    Private Const ICON_SYSTEM_DIR As Integer = 10
+    Private Const ICON_PROGRAM_DIR As Integer = 11
+    Private Const ICON_NETWORK_ADAPTER As Integer = 12
+    Private Const ICON_MAC_ADDRESS As Integer = 13
+    Private Const ICON_BIOS As Integer = 14
+    Private Const ICON_PROCESSOR_INFO As Integer = 15
+    Private Const ICON_GRAPHICS_CARD As Integer = 16
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not isShellRunning Then
             StartShell()
@@ -226,43 +243,53 @@ Public Class Form1
         DisplaySystemInformation()
         PopulateHDDBox()
         IsUserAdministrator()
-        ErrorProvider1.DataSource = errorList
+        FormFAQ.InitializeFaqContent()
+        GetOSAndRootDirectories()
     End Sub
 
+
     Private Sub DisplaySystemInformation()
+        ' Konfigurieren der ListView
         With SystemView
-            .View = View.Details
+            .View = View.Details ' Wichtig für Spaltenansicht
             .GridLines = True
-            .FullRowSelect = True
+            .FullRowSelect = True ' Auswählen der gesamten Zeile
+            .SmallImageList = Me.ImageList1 ' <<< WICHTIG: ImageList zuweisen
+            ' .LargeImageList = Me.ImageList1 ' Falls du View = LargeIcon verwendest
+            .Columns.Clear() ' Vor dem Hinzufügen von Spalten leeren
+            ' Spalten hinzufügen
             .Columns.Add("Kategorie", 150, HorizontalAlignment.Left)
             .Columns.Add("Information", 350, HorizontalAlignment.Left) ' Breiter, um längere Texte aufzunehmen
         End With
 
-        ' Systeminformationen abrufen und hinzufügen
-        AddSystemInfo("Betriebssystem", GetOSInformation())
-        AddSystemInfo("Systemtyp", Environment.Is64BitOperatingSystem.ToString() & " Bit-System")
-        AddSystemInfo("Computername", Environment.MachineName)
-        AddSystemInfo("Benutzername", Environment.UserName)
-        AddSystemInfo("Domainname", Environment.UserDomainName)
-        AddSystemInfo("Anzahl Prozessoren", Environment.ProcessorCount.ToString())
-        AddSystemInfo("Arbeitsspeicher (Physikalisch)", GetTotalPhysicalMemory())
-        AddSystemInfo("Verfügbarer Arbeitsspeicher", GetAvailablePhysicalMemory())
-        AddSystemInfo("Hostname", Dns.GetHostName())
-        AddSystemInfo("IP-Adressen", GetLocalIPAddresses())
-        AddSystemInfo("System-Verzeichnis", Environment.SystemDirectory)
-        AddSystemInfo("Programm-Verzeichnis", Environment.CurrentDirectory)
-        AddSystemInfo("Netzwerkkarten (Name)", GetNetworkAdapterNames())
-        AddSystemInfo("Netzwerkkarten (MAC-Adressen)", GetNetworkAdapterMacAddresses())
-        AddSystemInfo("BIOS-Version", GetBIOSVersion())
-        AddSystemInfo("Prozessor-Information", GetProcessorInformation())
-        AddSystemInfo("Grafikkarte", GetGraphicsCardInformation())
-        ' Hinweis: Die allgemeine Festplatteninfo wird hier nicht mehr direkt hinzugefügt,
-        ' da wir eine dedizierte Box dafür haben.
-        ' AddSystemInfo("Festplatteninformationen", GetDriveInformation())
-        GetOSAndRootDirectories()
-        IsUserAdministrator()
-
+        ' Systeminformationen abrufen und hinzufügen (jetzt mit Icon-Index)
+        ' HINWEIS: Die Reihenfolge der Icons in ImageList1 muss zu diesen Indizes passen!
+        AddSystemInfo("Betriebssystem", GetOSInformation(), ICON_OS)
+        AddSystemInfo("Systemtyp", Environment.Is64BitOperatingSystem.ToString() & " Bit-System", ICON_SYSTEM_TYPE)
+        AddSystemInfo("Computername", Environment.MachineName, ICON_COMPUTER_NAME)
+        AddSystemInfo("Benutzername", Environment.UserName, ICON_USER_NAME)
+        AddSystemInfo("Domainname", Environment.UserDomainName, ICON_DOMAIN_NAME)
+        AddSystemInfo("Anzahl Prozessoren", Environment.ProcessorCount.ToString(), ICON_PROCESSOR_COUNT)
+        AddSystemInfo("Arbeitsspeicher (Physikalisch)", GetTotalPhysicalMemory(), ICON_RAM)
+        AddSystemInfo("Verfügbarer Arbeitsspeicher", GetAvailablePhysicalMemory(), ICON_AVAIL_RAM)
+        AddSystemInfo("Hostname", Dns.GetHostName(), ICON_HOSTNAME)
+        AddSystemInfo("IP-Adressen", GetLocalIPAddresses(), ICON_IP_ADDRESSES)
+        AddSystemInfo("System-Verzeichnis", Environment.SystemDirectory, ICON_SYSTEM_DIR)
+        AddSystemInfo("Programm-Verzeichnis", Environment.CurrentDirectory, ICON_PROGRAM_DIR)
+        AddSystemInfo("Netzwerkkarten (Name)", GetNetworkAdapterNames(), ICON_NETWORK_ADAPTER)
+        AddSystemInfo("Netzwerkkarten (MAC-Adressen)", GetNetworkAdapterMacAddresses(), ICON_MAC_ADDRESS)
+        AddSystemInfo("BIOS-Version", GetBIOSVersion(), ICON_BIOS)
+        AddSystemInfo("Prozessor-Information", GetProcessorInformation(), ICON_PROCESSOR_INFO)
+        AddSystemInfo("Grafikkarte", GetGraphicsCardInformation(), ICON_GRAPHICS_CARD)
     End Sub
+
+    ' Hilfsfunktion zum Hinzufügen von Einträgen zur ListView (JETZT MIT ICON-INDEX)
+    Private Sub AddSystemInfo(ByVal category As String, ByVal information As String, ByVal imageIndex As Integer)
+        Dim item As New ListViewItem(category, imageIndex) ' Icon-Index hier übergeben
+        item.SubItems.Add(information)
+        SystemView.Items.Add(item)
+    End Sub
+
 
 
     ' Hilfsfunktion zum Hinzufügen von Einträgen zur ListView
@@ -585,10 +612,10 @@ Public Class Form1
 
 
     Private Sub ÜberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜberToolStripMenuItem.Click
-        About.Show()
+        Dialog1.Show()
     End Sub
 
-    Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HilfeToolStripMenuItem.Click
+    Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs)
         FormFAQ.Show()
     End Sub
 
@@ -657,15 +684,6 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Get_errorProvider(errCode As Integer, e As ErrObject)
-        Dim erMesControl As Integer = errCode
-        Dim message As String = e.Description
-        Dim errorControl As String = ""
-        If errorList.Contains(erMesControl) Then
-            Label1.Text = message
-        End If
-    End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
     End Sub
@@ -677,6 +695,16 @@ Public Class Form1
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
 
     End Sub
-End Class
+    Private Sub SystemINCToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles SystemINCToolStripMenuItem.Click
+        Dialog1.Show()
+    End Sub
 
+    Private Sub EULAToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EULAToolStripMenuItem.Click
+        About.Show()
+    End Sub
+
+    Private Sub HilfeToolStripMenuItem1_Click_1(sender As Object, e As EventArgs) Handles HilfeToolStripMenuItem1.Click
+        FormFAQ.Show()
+    End Sub
+End Class
 

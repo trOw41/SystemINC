@@ -26,11 +26,18 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         MenuStrip1 = New MenuStrip()
         MenüToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator4 = New ToolStripSeparator()
         BeendenToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator5 = New ToolStripSeparator()
         InfoToolStripMenuItem = New ToolStripMenuItem()
-        HilfeToolStripMenuItem = New ToolStripMenuItem()
         ÜberToolStripMenuItem = New ToolStripMenuItem()
+        SystemINCToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator3 = New ToolStripSeparator()
+        EULAToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator2 = New ToolStripSeparator()
+        HilfeToolStripMenuItem1 = New ToolStripMenuItem()
         Panel1 = New Panel()
+        Label5 = New Label()
         Label4 = New Label()
         Button4 = New Button()
         Button5 = New Button()
@@ -43,6 +50,7 @@ Partial Class Form1
         Button1 = New Button()
         HDDBox = New ListBox()
         SystemView = New ListView()
+        ImageList1 = New ImageList(components)
         TP1 = New TableLayoutPanel()
         PictureBox2 = New PictureBox()
         PictureBox3 = New PictureBox()
@@ -67,15 +75,15 @@ Partial Class Form1
         ' MenuStrip1
         ' 
         resources.ApplyResources(MenuStrip1, "MenuStrip1")
-        MenuStrip1.BackColor = Color.Lavender
+        MenuStrip1.BackColor = SystemColors.ActiveCaption
         ErrorProvider1.SetError(MenuStrip1, resources.GetString("MenuStrip1.Error"))
-        MenuStrip1.GripMargin = New Padding(0)
+        MenuStrip1.GripMargin = New Padding(10)
         HelpProvider1.SetHelpKeyword(MenuStrip1, resources.GetString("MenuStrip1.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(MenuStrip1, resources.GetObject("MenuStrip1.HelpNavigator"))
         HelpProvider1.SetHelpString(MenuStrip1, resources.GetString("MenuStrip1.HelpString"))
         ErrorProvider1.SetIconAlignment(MenuStrip1, resources.GetObject("MenuStrip1.IconAlignment"))
         ErrorProvider1.SetIconPadding(MenuStrip1, resources.GetObject("MenuStrip1.IconPadding"))
-        MenuStrip1.ImageScalingSize = New Size(24, 24)
+        MenuStrip1.ImageScalingSize = New Size(20, 20)
         MenuStrip1.Items.AddRange(New ToolStripItem() {MenüToolStripMenuItem, InfoToolStripMenuItem})
         MenuStrip1.Name = "MenuStrip1"
         HelpProvider1.SetShowHelp(MenuStrip1, resources.GetObject("MenuStrip1.ShowHelp"))
@@ -84,40 +92,69 @@ Partial Class Form1
         ' MenüToolStripMenuItem
         ' 
         resources.ApplyResources(MenüToolStripMenuItem, "MenüToolStripMenuItem")
-        MenüToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {BeendenToolStripMenuItem})
-        MenüToolStripMenuItem.Image = My.Resources.Resources.icons8_mappe_144
+        MenüToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ToolStripSeparator4, BeendenToolStripMenuItem, ToolStripSeparator5})
         MenüToolStripMenuItem.Name = "MenüToolStripMenuItem"
+        ' 
+        ' ToolStripSeparator4
+        ' 
+        resources.ApplyResources(ToolStripSeparator4, "ToolStripSeparator4")
+        ToolStripSeparator4.Name = "ToolStripSeparator4"
         ' 
         ' BeendenToolStripMenuItem
         ' 
         resources.ApplyResources(BeendenToolStripMenuItem, "BeendenToolStripMenuItem")
-        BeendenToolStripMenuItem.Image = My.Resources.Resources.icons8_löschen_144
         BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem"
+        ' 
+        ' ToolStripSeparator5
+        ' 
+        resources.ApplyResources(ToolStripSeparator5, "ToolStripSeparator5")
+        ToolStripSeparator5.Name = "ToolStripSeparator5"
         ' 
         ' InfoToolStripMenuItem
         ' 
         resources.ApplyResources(InfoToolStripMenuItem, "InfoToolStripMenuItem")
-        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {HilfeToolStripMenuItem, ÜberToolStripMenuItem})
-        InfoToolStripMenuItem.Image = My.Resources.Resources._011_warning
+        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ÜberToolStripMenuItem, ToolStripSeparator2, HilfeToolStripMenuItem1})
+        InfoToolStripMenuItem.Image = My.Resources.Resources._018_information_button
         InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
-        ' 
-        ' HilfeToolStripMenuItem
-        ' 
-        resources.ApplyResources(HilfeToolStripMenuItem, "HilfeToolStripMenuItem")
-        HilfeToolStripMenuItem.Image = My.Resources.Resources._002_tablet
-        HilfeToolStripMenuItem.Name = "HilfeToolStripMenuItem"
         ' 
         ' ÜberToolStripMenuItem
         ' 
         resources.ApplyResources(ÜberToolStripMenuItem, "ÜberToolStripMenuItem")
-        ÜberToolStripMenuItem.Image = My.Resources.Resources._009_technology
+        ÜberToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {SystemINCToolStripMenuItem, ToolStripSeparator3, EULAToolStripMenuItem})
         ÜberToolStripMenuItem.Name = "ÜberToolStripMenuItem"
+        ' 
+        ' SystemINCToolStripMenuItem
+        ' 
+        resources.ApplyResources(SystemINCToolStripMenuItem, "SystemINCToolStripMenuItem")
+        SystemINCToolStripMenuItem.Name = "SystemINCToolStripMenuItem"
+        ' 
+        ' ToolStripSeparator3
+        ' 
+        resources.ApplyResources(ToolStripSeparator3, "ToolStripSeparator3")
+        ToolStripSeparator3.Name = "ToolStripSeparator3"
+        ' 
+        ' EULAToolStripMenuItem
+        ' 
+        resources.ApplyResources(EULAToolStripMenuItem, "EULAToolStripMenuItem")
+        EULAToolStripMenuItem.Name = "EULAToolStripMenuItem"
+        ' 
+        ' ToolStripSeparator2
+        ' 
+        resources.ApplyResources(ToolStripSeparator2, "ToolStripSeparator2")
+        ToolStripSeparator2.Name = "ToolStripSeparator2"
+        ' 
+        ' HilfeToolStripMenuItem1
+        ' 
+        resources.ApplyResources(HilfeToolStripMenuItem1, "HilfeToolStripMenuItem1")
+        HilfeToolStripMenuItem1.Image = My.Resources.Resources._028_faq
+        HilfeToolStripMenuItem1.Name = "HilfeToolStripMenuItem1"
         ' 
         ' Panel1
         ' 
         resources.ApplyResources(Panel1, "Panel1")
         Panel1.BackColor = SystemColors.ControlDarkDark
         Panel1.BorderStyle = BorderStyle.FixedSingle
+        Panel1.Controls.Add(Label5)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(Button4)
         Panel1.Controls.Add(Button5)
@@ -136,6 +173,19 @@ Partial Class Form1
         ErrorProvider1.SetIconPadding(Panel1, resources.GetObject("Panel1.IconPadding"))
         Panel1.Name = "Panel1"
         HelpProvider1.SetShowHelp(Panel1, resources.GetObject("Panel1.ShowHelp"))
+        ' 
+        ' Label5
+        ' 
+        resources.ApplyResources(Label5, "Label5")
+        ErrorProvider1.SetError(Label5, resources.GetString("Label5.Error"))
+        Label5.ForeColor = Color.AliceBlue
+        HelpProvider1.SetHelpKeyword(Label5, resources.GetString("Label5.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Label5, resources.GetObject("Label5.HelpNavigator"))
+        HelpProvider1.SetHelpString(Label5, resources.GetString("Label5.HelpString"))
+        ErrorProvider1.SetIconAlignment(Label5, resources.GetObject("Label5.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Label5, resources.GetObject("Label5.IconPadding"))
+        Label5.Name = "Label5"
+        HelpProvider1.SetShowHelp(Label5, resources.GetObject("Label5.ShowHelp"))
         ' 
         ' Label4
         ' 
@@ -250,7 +300,7 @@ Partial Class Form1
         HddBar1.Name = "HddBar1"
         HelpProvider1.SetShowHelp(HddBar1, resources.GetObject("HddBar1.ShowHelp"))
         HddBar1.Step = 1
-        HddBar1.Style = ProgressBarStyle.Continuous
+        HddBar1.Value = 15
         ' 
         ' HDDLabel
         ' 
@@ -285,6 +335,7 @@ Partial Class Form1
         ' 
         resources.ApplyResources(HDDBox, "HDDBox")
         HDDBox.BackColor = SystemColors.ActiveBorder
+        HDDBox.BorderStyle = BorderStyle.FixedSingle
         ErrorProvider1.SetError(HDDBox, resources.GetString("HDDBox.Error"))
         HDDBox.ForeColor = SystemColors.MenuText
         HDDBox.FormattingEnabled = True
@@ -303,6 +354,8 @@ Partial Class Form1
         SystemView.BorderStyle = BorderStyle.FixedSingle
         ErrorProvider1.SetError(SystemView, resources.GetString("SystemView.Error"))
         SystemView.ForeColor = SystemColors.ActiveCaptionText
+        SystemView.FullRowSelect = True
+        SystemView.GridLines = True
         HelpProvider1.SetHelpKeyword(SystemView, resources.GetString("SystemView.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(SystemView, resources.GetObject("SystemView.HelpNavigator"))
         HelpProvider1.SetHelpString(SystemView, resources.GetString("SystemView.HelpString"))
@@ -310,12 +363,37 @@ Partial Class Form1
         ErrorProvider1.SetIconPadding(SystemView, resources.GetObject("SystemView.IconPadding"))
         SystemView.Name = "SystemView"
         HelpProvider1.SetShowHelp(SystemView, resources.GetObject("SystemView.ShowHelp"))
+        SystemView.ShowItemToolTips = True
+        SystemView.SmallImageList = ImageList1
         SystemView.UseCompatibleStateImageBehavior = False
+        ' 
+        ' ImageList1
+        ' 
+        ImageList1.ColorDepth = ColorDepth.Depth32Bit
+        ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), ImageListStreamer)
+        ImageList1.TransparentColor = Color.Transparent
+        ImageList1.Images.SetKeyName(0, "015-os.png")
+        ImageList1.Images.SetKeyName(1, "005-information-technology.png")
+        ImageList1.Images.SetKeyName(2, "031-computer.png")
+        ImageList1.Images.SetKeyName(3, "017-profile-user.png")
+        ImageList1.Images.SetKeyName(4, "042-mergers-and-acquisitions.png")
+        ImageList1.Images.SetKeyName(5, "023-cpu.png")
+        ImageList1.Images.SetKeyName(6, "029-ram-1.png")
+        ImageList1.Images.SetKeyName(7, "028-ram.png")
+        ImageList1.Images.SetKeyName(8, "032-monitor.png")
+        ImageList1.Images.SetKeyName(9, "034-ip-address.png")
+        ImageList1.Images.SetKeyName(10, "037-folder-1.png")
+        ImageList1.Images.SetKeyName(11, "036-folder.png")
+        ImageList1.Images.SetKeyName(12, "044-wifi-1.png")
+        ImageList1.Images.SetKeyName(13, "011-system-administration.png")
+        ImageList1.Images.SetKeyName(14, "045-firmware.png")
+        ImageList1.Images.SetKeyName(15, "022-processor.png")
+        ImageList1.Images.SetKeyName(16, "026-graphics-card.png")
         ' 
         ' TP1
         ' 
         resources.ApplyResources(TP1, "TP1")
-        TP1.BackColor = Color.Azure
+        TP1.BackColor = SystemColors.ActiveCaption
         TP1.Controls.Add(PictureBox2, 1, 0)
         TP1.Controls.Add(PictureBox3, 2, 0)
         TP1.Controls.Add(PictureBox1, 0, 0)
@@ -388,7 +466,7 @@ Partial Class Form1
         ' Label3
         ' 
         resources.ApplyResources(Label3, "Label3")
-        Label3.BackColor = Color.Azure
+        Label3.BackColor = SystemColors.ActiveCaption
         ErrorProvider1.SetError(Label3, resources.GetString("Label3.Error"))
         HelpProvider1.SetHelpKeyword(Label3, resources.GetString("Label3.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Label3, resources.GetObject("Label3.HelpNavigator"))
@@ -403,7 +481,7 @@ Partial Class Form1
         resources.ApplyResources(Label1, "Label1")
         Label1.AutoEllipsis = True
         ErrorProvider1.SetError(Label1, resources.GetString("Label1.Error"))
-        Label1.ForeColor = SystemColors.HighlightText
+        Label1.ForeColor = SystemColors.ActiveCaptionText
         HelpProvider1.SetHelpKeyword(Label1, resources.GetString("Label1.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Label1, resources.GetObject("Label1.HelpNavigator"))
         HelpProvider1.SetHelpString(Label1, resources.GetString("Label1.HelpString"))
@@ -421,7 +499,7 @@ Partial Class Form1
         ' Panel3
         ' 
         resources.ApplyResources(Panel3, "Panel3")
-        Panel3.BackColor = Color.Gold
+        Panel3.BackColor = SystemColors.ControlDarkDark
         Panel3.BorderStyle = BorderStyle.FixedSingle
         Panel3.Controls.Add(TP1)
         ErrorProvider1.SetError(Panel3, resources.GetString("Panel3.Error"))
@@ -479,8 +557,6 @@ Partial Class Form1
 
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents MenüToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents HilfeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
     Friend WithEvents SystemView As ListView
     Friend WithEvents TP1 As TableLayoutPanel
@@ -502,8 +578,18 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents ÜberToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Button5 As Button
     Friend WithEvents Label4 As Label
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents ImageList1 As ImageList
+    Friend WithEvents Label5 As Label
+    Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ÜberToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SystemINCToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents EULAToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents HilfeToolStripMenuItem1 As ToolStripMenuItem
 End Class

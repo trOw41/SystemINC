@@ -142,6 +142,9 @@
   <data name="002-tablet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\002-tablet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="018-information-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\018-information-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="016-shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\016-shield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,11 +163,18 @@
   <data name="001-desktop-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\001-desktop-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="004-upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\004-upgrade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-löschen-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-löschen-144.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="006-restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\006-restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="discription" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\description.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <comment>App discription</comment>
+  </data>
+  <data name="004-upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\004-upgrade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="010-stethoscope" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\010-stethoscope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,14 +188,13 @@
   <data name="icons8-mappe-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-mappe-1441.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LICENSE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LICENSE.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="018-biometric-identification" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\018-biometric-identification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-löschen-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-löschen-144.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="discription" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\description.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    <comment>App discription</comment>
+  <data name="028-faq" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\028-faq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

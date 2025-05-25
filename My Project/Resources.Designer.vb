@@ -243,6 +243,16 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _018_information_button() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("018-information-button", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property _019_laptop_2() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("019-laptop-2", resourceCulture)
@@ -256,6 +266,16 @@ Namespace My.Resources
         Friend ReadOnly Property _020_computer_1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("020-computer-1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _028_faq() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("028-faq", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -287,6 +307,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("icons8-mappe-144", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property LICENSE() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LICENSE", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
     End Module

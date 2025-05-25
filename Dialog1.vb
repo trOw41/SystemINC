@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class Dialog1
-
+    Private _displayText As String
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
@@ -14,11 +14,16 @@ Public Class Dialog1
 
 
     Private Sub Dialog1_load(sender As Object, e As EventArgs)
-
-        Dim text As String = My.Resources.discription.ToString
-        If text IsNot Nothing Then
-            TextBox.Text = text
+        If Me.Controls.ContainsKey("TextBox") AndAlso TypeOf Me.Controls("TextBox") Is TextBox Then
+            Dim targetTextBox As TextBox = DirectCast(Me.Controls("TextBox"), TextBox)
+            If Not String.IsNullOrEmpty(_displayText) Then
+                targetTextBox.Text = _displayText
+            Else
+                targetTextBox.Text = "Es wurde kein Text zur Anzeige übergeben." ' Standardtext für leeren Fall
+            End If
+        Else
+            ' Optional: Logging oder Fehlermeldung, falls die TextBox nicht gefunden wird
+            Debug.WriteLine("Warnung: TextBox-Steuerelement in Dialog1 nicht gefunden.")
         End If
-
     End Sub
 End Class

@@ -68,6 +68,7 @@ Partial Class Dialog1
         ' TextBox
         ' 
         TextBox.BackColor = Color.AliceBlue
+        TextBox.BorderStyle = BorderStyle.FixedSingle
         TextBox.Dock = DockStyle.Top
         TextBox.Location = New Point(0, 0)
         TextBox.Name = "TextBox"

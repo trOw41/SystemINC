@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SystemINC_FAQ>
+	<Meta>
+		<Title>Häufig gestellte Fragen (FAQ) zu SystemINC</Title>
+		<Description>Diese FAQ soll Ihnen helfen, die Funktionen unseres Programms optimal zu nutzen und Antworten auf häufige Fragen zu finden.</Description>
+		<Version>1.0</Version>
+		<LastUpdated>2025-05-27</LastUpdated>
+	</Meta>
+
+	<Section id="general" title="Allgemeine Fragen zu SystemINC">
+		<Question id="q1">
+			<Title>Was ist SystemINC?</Title>
+			<Answer>SystemINC ist ein kleines Programm, das Ihnen hilft, wichtige Informationen über Ihren Computer schnell und einfach einzusehen. [cite: 2] Sie können damit grundlegende Details Ihres Systems abrufen, Festplatten überwachen und sogar einfache Befehle in einer integrierten Konsole ausführen. [cite: 3]</Answer>
+		</Question>
+		<Question id="q2">
+			<Title>Wie starte ich SystemINC?</Title>
+			<Answer>Starten Sie SystemINC, indem Sie die ausführbare Datei (meist SystemINC.exe) auf Ihrem Computer doppelklicken. [cite: 4]</Answer>
+		</Question>
+		<Question id="q3">
+			<Title>Was ist der Unterschied zwischen der "Systemübersicht" und den "Festplatteninformationen"?</Title>
+			<Answer>Die Systemübersicht zeigt allgemeine Details über Ihren Computer, wie das Betriebssystem, den Prozessor, den Arbeitsspeicher und Ihre Netzwerkeinstellungen. [cite: 6] Die Festplatteninformationen konzentrieren sich nur auf Ihre Speicherlaufwerke (Festplatten, SSDs, USB-Laufwerke) und zeigen deren Größe und Belegung an. [cite: 7]</Answer>
+		</Question>
+	</Section>
+
+	<Section id="system_overview" title="Die Systemübersicht (Tabelle oben links)">
+		<Question id="q4">
+			<Title>Welche Informationen finde ich in der Systemübersicht?</Title>
+			<Answer>
+				Hier finden Sie eine Vielzahl von Informationen, unter anderem: [cite: 9]
+				<ul>
+					<li>Betriebssystem: Name Ihrer Windows-Version und ob es sich um ein 32- oder 64-Bit-System handelt. [cite: 9]</li>
+					<li>Computer-/Benutzername: Der Name Ihres Computers und Ihr angemeldeter Benutzername. [cite: 10]</li>
+					<li>Prozessoren: Die Anzahl der CPU-Kerne. [cite: 10]</li>
+					<li>Arbeitsspeicher: Die Gesamtgröße des installierten Arbeitsspeichers und wie viel davon gerade frei ist. [cite: 11]</li>
+					<li>Netzwerk: Ihre lokalen IP-Adressen und die Namen Ihrer Netzwerkkarten. [cite: 12]</li>
+					<li>BIOS-Version: Informationen zu Ihrem System-BIOS. [cite: 12]</li>
+					<li>Grafikkarte: Der Name Ihrer installierten Grafikkarte(n). [cite: 12]</li>
+				</ul>
+			</Answer>
+		</Question>
+		<Question id="q5">
+			<Title>Kann ich die Informationen in der Systemübersicht bearbeiten?</Title>
+			<Answer>Nein, die angezeigten Informationen sind schreibgeschützt und dienen nur zur Ansicht. [cite: 13]</Answer>
+		</Question>
+	</Section>
+
+	<Section id="disk_info" title="Festplatteninformationen (Liste und Details)">
+		<Question id="q6">
+			<Title>Wie sehe ich, welche Festplatten ich habe?</Title>
+			<Answer>Auf der linken Seite des Programms sehen Sie eine Liste (die "HDDBox"), die alle erkannten Speicherlaufwerke auf Ihrem Computer auflistet, z.B. [cite: 15] "C:\ (Lokaler Datenträger) - 500.00 GB". [cite: 16]</Answer>
+		</Question>
+		<Question id="q7">
+			<Title>Wie erhalte ich Details zu einer bestimmten Festplatte?</Title>
+			<Answer>Klicken Sie einfach auf den Namen des Laufwerks in der Liste. Die Details werden dann daneben angezeigt. [cite: 17]</Answer>
+		</Question>
+		<Question id="q8">
+			<Title>Welche Details werden für eine Festplatte angezeigt?</Title>
+			<Answer>
+				Für das ausgewählte Laufwerk sehen Sie: [cite: 18]
+				<ul>
+					<li>Den Laufwerksnamen und -typ (z.B. C:, Lokaler Datenträger). [cite: 18]</li>
+					<li>Die Gesamtgröße des Laufwerks. [cite: 19]</li>
+					<li>Den freien Speicherplatz (in GB und als Prozentsatz). [cite: 19]</li>
+					<li>Den belegten Speicherplatz (in GB und als Prozentsatz). [cite: 19]</li>
+					<li>Eine Fortschrittsleiste (Progress Bar), die visuell darstellt, wie viel Speicherplatz belegt ist. [cite: 20]</li>
+				</ul>
+			</Answer>
+		</Question>
+		<Question id="q9">
+			<Title>Warum steht bei einem Laufwerk "Nicht bereit"?</Title>
+			<Answer>Dies kann bei bestimmten Laufwerkstypen (z.B. leere CD/DVD-Laufwerke oder nicht angeschlossene Netzlaufwerke) auftreten, wenn das System nicht sofort auf sie zugreifen kann. [cite: 21]</Answer>
+		</Question>
+	</Section>
+
+	<Section id="shell_console" title="Integrierte Shell-Konsole (Textfeld unten)">
+		<Question id="q10">
+			<Title>Was ist die "Shell-Konsole" und wofür brauche ich sie?</Title>
+			<Answer>Die Shell-Konsole ermöglicht es Ihnen, Befehle direkt an das Betriebssystem zu senden, ähnlich wie bei der Windows-Eingabeaufforderung (cmd.exe). [cite: 23] Dies ist nützlich für Benutzer, die mit Kommandozeilenbefehlen vertraut sind, um z.B. [cite: 24] Netzwerkdiagnosen (ipconfig), Verzeichnisinhalte (dir) oder andere Systemoperationen durchzuführen, ohne ein separates Konsolenfenster öffnen zu müssen. [cite: 25]</Answer>
+		</Question>
+		<Question id="q11">
+			<Title>Wie starte ich die Shell-Konsole?</Title>
+			<Answer>Klicken Sie auf den Button, der mit "Shell starten" beschriftet ist. Der Text in der Konsole wird dies bestätigen. [cite: 26]</Answer>
+		</Question>
+		<Question id="q12">
+			<Title>Wie gebe ich einen Befehl ein und sende ihn ab?</Title>
+			<Answer>Geben Sie Ihren Befehl in das kleine Textfeld unterhalb der Konsole ein und drücken Sie dann die Enter-Taste auf Ihrer Tastatur oder klicken Sie auf den "Senden"-Button daneil. [cite: 28]</Answer>
+		</Question>
+		<Question id="q13">
+			<Title>Wie sehe ich die Ausgabe meiner Befehle?</Title>
+			<Answer>Die Antworten und Ausgaben der Shell erscheinen direkt in der großen Konsole (RichTextBox). [cite: 29] Ihre eingegebenen Befehle werden dort zur besseren Unterscheidung grün angezeigt. [cite: 30]</Answer>
+		</Question>
+		<Question id="q14">
+			<Title>Was passiert, wenn ein Fehler bei einem Befehl auftritt?</Title>
+			<Answer>Fehlermeldungen der Shell werden in der Konsole rot dargestellt, um sie leichter erkennbar zu machen. [cite: 31]</Answer>
+		</Question>
+		<Question id="q15">
+			<Title>Wie beende ich die Shell-Konsole?</Title>
+			<Answer>Klicken Sie erneut auf den Button, der nun mit "Shell beenden" beschriftet ist. [cite: 32] Alternativ können Sie auch den Befehl exit in die Konsole eingeben und Enter drücken. [cite: 33]</Answer>
+		</Question>
+	</Section>
+
+	<Section id="start_programs" title="Programme starten">
+		<Question id="q16">
+			<Title>Kann ich mit SystemINC andere Programme starten?</Title>
+			<Answer>Ja, wenn ein entsprechender Button im Programm vorhanden ist (z.B. ein Button zum Starten von Notepad), können Sie darauf klicken, um die verknüpfte Anwendung zu öffnen. [cite: 34]</Answer>
+		</Question>
+		<Question id="q17">
+			<Title>Was passiert, wenn ein Programm nicht gestartet werden kann?</Title>
+			<Answer>Sollte ein Programm nicht gefunden werden oder ein Fehler beim Start auftreten, wird eine entsprechende Fehlermeldung in der integrierten Shell-Konsole angezeigt. [cite: 35]</Answer>
+		</Question>
+	</Section>
+</SystemINC_FAQ>
