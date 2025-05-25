@@ -1,14 +1,22 @@
-﻿Imports System.Diagnostics
+﻿Imports System.ComponentModel.Design
+Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports Windows.Foundation.Diagnostics
+Imports System.Exception
+Imports System.Reflection.Emit
+
 
 Public Class Form1
 
     Private cmdProcess As Process
     Private isShellRunning As Boolean = False
+    Private errorList As List(Of String)
+    Private ex0 As ErrObject
+    Private DateStamp As Date
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click, Button2.Click, Button3.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not isShellRunning Then
             StartShell()
             Button1.Text = "Shell beenden"
@@ -180,14 +188,14 @@ Public Class Form1
     Private Sub Console_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Console.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
             e.Handled = True ' Verhindert den Piepton beim Drücken von Enter
-            SendCommand()
+            SendCommand(sender, e.KeyChar)
         End If
     End Sub
 
-    Private Sub SendCommand()
+    Private Sub SendCommand(sender As Object, command As String)
         ' Diese Methode wird direkt von UI-Events aufgerufen, ist also bereits im UI-Thread
         If cmdProcess IsNot Nothing AndAlso Not cmdProcess.HasExited AndAlso isShellRunning Then
-            Dim command As String = Console.Text.Trim()
+            command = Console.Text.Trim()
             If Not String.IsNullOrEmpty(command) Then
                 Try
                     ' Befehl in der RichTextBox anzeigen (als Echo)
@@ -217,6 +225,8 @@ Public Class Form1
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         DisplaySystemInformation()
         PopulateHDDBox()
+        IsUserAdministrator()
+        ErrorProvider1.DataSource = errorList
     End Sub
 
     Private Sub DisplaySystemInformation()
@@ -249,7 +259,11 @@ Public Class Form1
         ' Hinweis: Die allgemeine Festplatteninfo wird hier nicht mehr direkt hinzugefügt,
         ' da wir eine dedizierte Box dafür haben.
         ' AddSystemInfo("Festplatteninformationen", GetDriveInformation())
+        GetOSAndRootDirectories()
+        IsUserAdministrator()
+
     End Sub
+
 
     ' Hilfsfunktion zum Hinzufügen von Einträgen zur ListView
     Private Sub AddSystemInfo(ByVal category As String, ByVal information As String)
@@ -257,7 +271,42 @@ Public Class Form1
         item.SubItems.Add(information)
         SystemView.Items.Add(item)
     End Sub
-
+    Private Function EnsureAdminRightsAndCreateDirectory(directoryPath As String) As Boolean
+        If Not IsUserAdministrator() Then
+            ' Starte die Anwendung mit Admin-Rechten neu
+            Dim currentProcessInfo As New ProcessStartInfo With {
+                .FileName = Application.ExecutablePath,
+                .Arguments = "",
+                .Verb = "runas"
+            }
+            Try
+                Process.Start(currentProcessInfo)
+                Return True
+            Catch ex As System.ComponentModel.Win32Exception When ex.NativeErrorCode = 1223
+                MessageBox.Show("Administratorrechte sind erforderlich, um den Ordner zu erstellen.", "Berechtigung erforderlich", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            Catch ex As Exception
+                MessageBox.Show($"Fehler beim Anfordern von Administratorrechten: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+            Return False
+        Else
+            Try
+                If Not Directory.Exists(directoryPath) Then
+                    Directory.CreateDirectory(directoryPath)
+                End If
+                Return True
+            Catch ex As Exception
+                MessageBox.Show($"Fehler beim Erstellen des Ordners: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End Try
+        End If
+    End Function
+    Private Function IsUserAdministrator() As Boolean
+        Dim identity As System.Security.Principal.WindowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent()
+        Dim principal As New System.Security.Principal.WindowsPrincipal(identity)
+        Return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator)
+    End Function
     ' NEU: Befüllt die HDDBox mit Festplatteninformationen
     Private Sub PopulateHDDBox()
         HDDBox.Items.Clear() ' Vor dem Befüllen leeren
@@ -504,6 +553,37 @@ Public Class Form1
         End If
     End Sub
 
+
+
+    Private Sub GetOSAndRootDirectories()
+        Try
+            ' 1. Systemverzeichnis (z.B. C:\Windows)
+            Dim systemDirectory As String = Environment.SystemDirectory
+
+            ' 2. Root-Verzeichnis des Systemlaufwerks (z.B. C:\)
+            ' Man kann den Root-Pfad aus dem Systemverzeichnis ableiten
+            Dim rootDirectory As String = Path.GetPathRoot(systemDirectory)
+
+            ' Anzeigen in Ihrer RichTextBox "Console"
+            ' Me.Invoke(Sub()
+            'Console.AppendText($"System-Verzeichnis: {systemDirectory}{Environment.NewLine}")
+            'Console.AppendText($"Root-Verzeichnis des Systemlaufwerks: {rootDirectory}{Environment.NewLine}")
+            'Console.ScrollToCaret()
+            'End Sub)'
+            My.Settings.OS_RootDir = rootDirectory
+            MessageBox.Show($"OS Verzeichniss: {rootDirectory}")
+        Catch ex As Exception
+            ' Me.Invoke(Sub()
+            '  Console.AppendText($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}{Environment.NewLine}")
+            ' Console.ScrollToCaret()
+            ' End Sub)
+            MessageBox.Show($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}")
+        End Try
+    End Sub
+
+
+
+
     Private Sub ÜberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜberToolStripMenuItem.Click
         About.Show()
     End Sub
@@ -517,11 +597,85 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If Not TP1.Visible = True Then
-            TP1.Visible = True
+        If Not Console.Visible = True Then
+            Console.Visible = True
         Else
-            TP1.Visible = False
+            Console.Visible = False
         End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim res As Boolean = IsUserAdministrator()
+        ' Optional: Eine Meldung in Ihrer RichTextBox "Console" anzeigen
+        Dim programPath As String = My.Settings.OS_RootDir & "Windows\System32\diskmgmt.msc"
+        If res = True Then
+
+            If Not Console.Visible = True Then
+                Console.Visible = True
+            End If
+            Try
+                ' Pfad zum externen Programm
+                ' Beispiel 1: Notepad öffnen
+                ' Dim programPath As String = "diskmgmt.msc"
+
+                ' Dim root() As String = GetOSAndRootDirectories()
+
+
+                ' Beispiel 3: Ein Programm mit Argumenten (z.B. eine Textdatei in Notepad öffnen)
+                ' Dim programPath As String = "notepad.exe"
+                ' Dim arguments As String = "C:\Pfad\Zu\Meiner\Datei.txt"
+                ' Process.Start(programPath, arguments)
+
+                ' Starten des Programms
+
+
+                Me.Invoke(Sub()
+                              Process.Start(programPath)
+                              SendCommand(sender, $"cd Windows\System32 {Environment.NewLine}")
+                              SendCommand(sender, $"dir {Environment.NewLine}")
+                              SendCommand(sender, $"diskmgmt.msc {Environment.NewLine}")
+                          End Sub)
+
+            Catch ex As Exception
+                ' Fehlerbehandlung: Wenn das Programm nicht gefunden wird oder ein anderer Fehler auftritt
+                Dim errInt As String = ex.StackTrace
+                errorList.Add(errInt & "," & Date.Now)
+                If errorList IsNot Nothing Or errorList.Count > 0 Then
+                    Label1.Text = $"Fehler beim Starten des Programms:" & ex.StackTrace & $" |Err.Code: {errInt}"
+                Else
+                    MessageBox.Show(errInt)
+                End If
+
+
+
+
+            End Try
+        ElseIf res = False Then
+            EnsureAdminRightsAndCreateDirectory(programPath)
+            MessageBox.Show("No Admin rights granted please do and restart Disk-Mangement Tool")
+
+        End If
+    End Sub
+
+    Private Sub Get_errorProvider(errCode As Integer, e As ErrObject)
+        Dim erMesControl As Integer = errCode
+        Dim message As String = e.Description
+        Dim errorControl As String = ""
+        If errorList.Contains(erMesControl) Then
+            Label1.Text = message
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
     End Sub
 End Class
 
