@@ -90,7 +90,7 @@ Wir freuen uns über Beiträge! Wenn Sie Fehler finden, Verbesserungen vorschlag
 
 ## Lizenz
 
-Dieses Projekt steht unter der [MIT-Lizenz](LICENSE).
+Dieses Projekt steht unter der [B2D-Lizenz](LICENSE).
 
 ---
 
