@@ -2,7 +2,6 @@
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(disposing As Boolean)
         Try
@@ -14,12 +13,9 @@ Partial Class Form1
         End Try
     End Sub
 
-    'Required by the Windows Form Designer
+
     Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
@@ -29,6 +25,8 @@ Partial Class Form1
         ToolStripSeparator4 = New ToolStripSeparator()
         BeendenToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator5 = New ToolStripSeparator()
+        SystemToolStripMenuItem = New ToolStripMenuItem()
+        ExportSysteminformationAsXMLToolStripMenuItem = New ToolStripMenuItem()
         InfoToolStripMenuItem = New ToolStripMenuItem()
         ÜberToolStripMenuItem = New ToolStripMenuItem()
         SystemINCToolStripMenuItem = New ToolStripMenuItem()
@@ -61,6 +59,9 @@ Partial Class Form1
         HelpProvider1 = New HelpProvider()
         Panel3 = New Panel()
         ErrorProvider1 = New ErrorProvider(components)
+        BindingSource1 = New BindingSource(components)
+        ToolStripSeparator1 = New ToolStripSeparator()
+        ExportAsToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
@@ -70,6 +71,7 @@ Partial Class Form1
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel3.SuspendLayout()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(BindingSource1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' MenuStrip1
@@ -84,7 +86,7 @@ Partial Class Form1
         ErrorProvider1.SetIconAlignment(MenuStrip1, resources.GetObject("MenuStrip1.IconAlignment"))
         ErrorProvider1.SetIconPadding(MenuStrip1, resources.GetObject("MenuStrip1.IconPadding"))
         MenuStrip1.ImageScalingSize = New Size(20, 20)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {MenüToolStripMenuItem, InfoToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {MenüToolStripMenuItem, SystemToolStripMenuItem, InfoToolStripMenuItem})
         MenuStrip1.Name = "MenuStrip1"
         HelpProvider1.SetShowHelp(MenuStrip1, resources.GetObject("MenuStrip1.ShowHelp"))
         MenuStrip1.ShowItemToolTips = True
@@ -109,6 +111,19 @@ Partial Class Form1
         ' 
         resources.ApplyResources(ToolStripSeparator5, "ToolStripSeparator5")
         ToolStripSeparator5.Name = "ToolStripSeparator5"
+        ' 
+        ' SystemToolStripMenuItem
+        ' 
+        resources.ApplyResources(SystemToolStripMenuItem, "SystemToolStripMenuItem")
+        SystemToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ExportSysteminformationAsXMLToolStripMenuItem, ToolStripSeparator1, ExportAsToolStripMenuItem})
+        SystemToolStripMenuItem.Image = My.Resources.Resources._031_computer
+        SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
+        ' 
+        ' ExportSysteminformationAsXMLToolStripMenuItem
+        ' 
+        resources.ApplyResources(ExportSysteminformationAsXMLToolStripMenuItem, "ExportSysteminformationAsXMLToolStripMenuItem")
+        ExportSysteminformationAsXMLToolStripMenuItem.Image = My.Resources.Resources._004_computer_science
+        ExportSysteminformationAsXMLToolStripMenuItem.Name = "ExportSysteminformationAsXMLToolStripMenuItem"
         ' 
         ' InfoToolStripMenuItem
         ' 
@@ -516,6 +531,17 @@ Partial Class Form1
         ErrorProvider1.ContainerControl = Me
         resources.ApplyResources(ErrorProvider1, "ErrorProvider1")
         ' 
+        ' ToolStripSeparator1
+        ' 
+        resources.ApplyResources(ToolStripSeparator1, "ToolStripSeparator1")
+        ToolStripSeparator1.Name = "ToolStripSeparator1"
+        ' 
+        ' ExportAsToolStripMenuItem
+        ' 
+        resources.ApplyResources(ExportAsToolStripMenuItem, "ExportAsToolStripMenuItem")
+        ExportAsToolStripMenuItem.Image = My.Resources.Resources._010_recommendations
+        ExportAsToolStripMenuItem.Name = "ExportAsToolStripMenuItem"
+        ' 
         ' Form1
         ' 
         resources.ApplyResources(Me, "$this")
@@ -548,6 +574,7 @@ Partial Class Form1
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         Panel3.ResumeLayout(False)
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).EndInit()
+        CType(BindingSource1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -592,4 +619,9 @@ Partial Class Form1
     Friend WithEvents EULAToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents HilfeToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents SystemToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportSysteminformationAsXMLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ExportAsToolStripMenuItem As ToolStripMenuItem
 End Class

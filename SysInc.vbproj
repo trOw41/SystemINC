@@ -32,10 +32,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.119" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.5" />
     <PackageReference Include="System.Management" Version="9.0.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="DataSet1.Designer.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Update="My Project\Application.Designer.vb">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -62,10 +73,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="description.txt">
+    <None Update="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="discription.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="FAQ.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="My Project\Application.myapp">
@@ -76,6 +94,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="Resources\LICENSE - Kopieren.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

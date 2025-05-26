@@ -118,29 +118,57 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="008-repair" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\008-repair.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="009-technology" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\009-technology2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="017-motherboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\017-motherboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="020-computer-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\020-computer-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="003-cpu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\003-cpu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="005-hacker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\005-hacker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="014-speech-bubble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\014-speech-bubble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="013-laptop-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\013-laptop-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="002-tablet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\002-tablet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LICENSE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LICENSE.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="020-computer-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\020-computer-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="004-computer-science" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\004-computer-science.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-mappe-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-mappe-1441.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="011-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\011-warning1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="007-update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\007-update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="017-motherboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\017-motherboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="015-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\015-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="003-cpu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\003-cpu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="001-desktop-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\001-desktop-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="discription" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\description.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <comment>App discription</comment>
+  </data>
+  <data name="012-laptop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\012-laptop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="004-upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\004-upgrade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="008-repair" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\008-repair.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="018-biometric-identification" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\018-biometric-identification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="018-information-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\018-information-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,20 +176,11 @@
   <data name="016-shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\016-shield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="019-laptop-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\019-laptop-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="028-faq" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\028-faq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="014-speech-bubble" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\014-speech-bubble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="007-update" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\007-update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="015-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\015-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="001-desktop-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\001-desktop-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="005-hacker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\005-hacker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-löschen-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-löschen-144.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,32 +188,22 @@
   <data name="006-restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\006-restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="discription" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\description.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    <comment>App discription</comment>
+  <data name="002-tablet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\002-tablet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="004-upgrade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\004-upgrade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="031-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\031-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="009-technology" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\009-technology2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="019-laptop-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\019-laptop-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="010-stethoscope" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\010-stethoscope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="011-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\011-warning1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="012-laptop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\012-laptop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-mappe-144" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-mappe-1441.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LICENSE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LICENSE.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="018-biometric-identification" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\018-biometric-identification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="028-faq" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\028-faq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="010-recommendations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\010-recommendations.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

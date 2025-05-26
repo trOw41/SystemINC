@@ -29,19 +29,6 @@ Partial Class FormFAQ
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFAQ))
-        Dim TreeNode14 As TreeNode = New TreeNode("Inhalt:")
-        Dim TreeNode15 As TreeNode = New TreeNode("1. Was ist FastArchiver?")
-        Dim TreeNode16 As TreeNode = New TreeNode("2. Wie füge ich Dateien oder Ordner zur Liste hinzu?")
-        Dim TreeNode17 As TreeNode = New TreeNode("Drag & Drop..")
-        Dim TreeNode18 As TreeNode = New TreeNode("Dateien auswählen..")
-        Dim TreeNode19 As TreeNode = New TreeNode("3. Wie erstelle ich ein ZIP-Archiv?", New TreeNode() {TreeNode17, TreeNode18, TreeNode16})
-        Dim TreeNode20 As TreeNode = New TreeNode("4. Wie öffne und sehe ich den Inhalt eines ZIP-Archivs?")
-        Dim TreeNode21 As TreeNode = New TreeNode("5. Wie entpacke ich Dateien aus einem ZIP-Archiv?")
-        Dim TreeNode22 As TreeNode = New TreeNode("6. Wie entferne ich Dateien aus der Liste?", New TreeNode() {TreeNode20, TreeNode21})
-        Dim TreeNode23 As TreeNode = New TreeNode("7. Wie ändere ich die Einstellungen (Farbe, Schriftart)?")
-        Dim TreeNode24 As TreeNode = New TreeNode("8. Warum benötigt die App Administratorrechte?")
-        Dim TreeNode25 As TreeNode = New TreeNode("9. Ich erhalte eine ""Zugriff verweigert""-Fehlermeldung beim Entpacken. Was kann ich tun?")
-        Dim TreeNode26 As TreeNode = New TreeNode("10. Wie leere ich die gesamte Dateiliste?")
         MenuStrip1 = New MenuStrip()
         DateiToolStripMenuItem = New ToolStripMenuItem()
         SchließenToolStripMenuItem = New ToolStripMenuItem()
@@ -56,7 +43,7 @@ Partial Class FormFAQ
         ' MenuStrip1
         ' 
         MenuStrip1.BackColor = SystemColors.ControlLight
-        MenuStrip1.Font = New Font("Arial", 9.0F)
+        MenuStrip1.Font = New Font("Arial", 9F)
         MenuStrip1.Items.AddRange(New ToolStripItem() {DateiToolStripMenuItem, ToolStripTextBox1, IndexBox})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
@@ -96,47 +83,13 @@ Partial Class FormFAQ
         ' faqTreeView
         ' 
         faqTreeView.BackColor = SystemColors.Control
-        faqTreeView.Font = New Font("Arial", 10.0F, FontStyle.Italic Or FontStyle.Underline, GraphicsUnit.Point, CByte(1), True)
+        faqTreeView.Font = New Font("Arial", 10F, FontStyle.Italic Or FontStyle.Underline, GraphicsUnit.Point, CByte(1), True)
         faqTreeView.FullRowSelect = True
         faqTreeView.HotTracking = True
         faqTreeView.ImageIndex = 0
         faqTreeView.ImageList = ImageList1
         faqTreeView.Location = New Point(12, 30)
         faqTreeView.Name = "faqTreeView"
-        TreeNode14.BackColor = SystemColors.Control
-        TreeNode14.ForeColor = SystemColors.MenuText
-        TreeNode14.Name = "index"
-        TreeNode14.NodeFont = New Font("Arial", 8.25F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        TreeNode14.SelectedImageKey = "(Standard)"
-        TreeNode14.StateImageKey = "(keine)"
-        TreeNode14.Text = "Inhalt:"
-        TreeNode15.Name = "i1"
-        TreeNode15.Text = "1. Was ist FastArchiver?"
-        TreeNode16.Name = "i2"
-        TreeNode16.Text = "2. Wie füge ich Dateien oder Ordner zur Liste hinzu?"
-        TreeNode17.ImageIndex = -2
-        TreeNode17.Name = "i2-1"
-        TreeNode17.Text = "Drag & Drop.."
-        TreeNode17.ToolTipText = "Drag & Drop"
-        TreeNode18.Name = "i2-2"
-        TreeNode18.Text = "Dateien auswählen.."
-        TreeNode19.Name = "i3"
-        TreeNode19.Text = "3. Wie erstelle ich ein ZIP-Archiv?"
-        TreeNode20.Name = "i4"
-        TreeNode20.Text = "4. Wie öffne und sehe ich den Inhalt eines ZIP-Archivs?"
-        TreeNode21.Name = "i5"
-        TreeNode21.Text = "5. Wie entpacke ich Dateien aus einem ZIP-Archiv?"
-        TreeNode22.Name = "i6"
-        TreeNode22.Text = "6. Wie entferne ich Dateien aus der Liste?"
-        TreeNode23.Name = "i7"
-        TreeNode23.Text = "7. Wie ändere ich die Einstellungen (Farbe, Schriftart)?"
-        TreeNode24.Name = "i8"
-        TreeNode24.Text = "8. Warum benötigt die App Administratorrechte?"
-        TreeNode25.Name = "i9"
-        TreeNode25.Text = "9. Ich erhalte eine ""Zugriff verweigert""-Fehlermeldung beim Entpacken. Was kann ich tun?"
-        TreeNode26.Name = "i10"
-        TreeNode26.Text = "10. Wie leere ich die gesamte Dateiliste?"
-        faqTreeView.Nodes.AddRange(New TreeNode() {TreeNode14, TreeNode15, TreeNode16, TreeNode19, TreeNode20, TreeNode21, TreeNode22, TreeNode23, TreeNode24, TreeNode25, TreeNode26})
         faqTreeView.SelectedImageIndex = 1
         faqTreeView.ShowNodeToolTips = True
         faqTreeView.ShowPlusMinus = False
@@ -155,7 +108,7 @@ Partial Class FormFAQ
         ' FaqText
         ' 
         FaqText.BackColor = Color.MintCream
-        FaqText.Font = New Font("Arial", 11.0F)
+        FaqText.Font = New Font("Arial", 11F)
         FaqText.Location = New Point(240, 30)
         FaqText.Name = "FaqText"
         FaqText.Size = New Size(489, 493)
@@ -164,7 +117,7 @@ Partial Class FormFAQ
         ' 
         ' FormFAQ
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         AutoSize = True
         BackColor = SystemColors.ControlLight

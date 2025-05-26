@@ -15,9 +15,8 @@ Public Class Form1
     Private errorList As List(Of String)
     Private ex0 As ErrObject
     Private DateStamp As Date
-    ' Diese Indizes müssen mit der Reihenfolge übereinstimmen, in der Sie die Icons in ImageList1 hinzugefügt haben!
-    Private Const ICON_OS As Integer = 0 ' Beispiel: Index für Betriebssystem-Icon
-    Private Const ICON_SYSTEM_TYPE As Integer = 1 ' Beispiel: Index für Systemtyp-Icon
+    Private Const ICON_OS As Integer = 0
+    Private Const ICON_SYSTEM_TYPE As Integer = 1
     Private Const ICON_COMPUTER_NAME As Integer = 2
     Private Const ICON_USER_NAME As Integer = 3
     Private Const ICON_DOMAIN_NAME As Integer = 4
@@ -33,6 +32,7 @@ Public Class Form1
     Private Const ICON_BIOS As Integer = 14
     Private Const ICON_PROCESSOR_INFO As Integer = 15
     Private Const ICON_GRAPHICS_CARD As Integer = 16
+    Private _systemInfoRepository As SystemInfoRepository
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not isShellRunning Then
             StartShell()
@@ -46,45 +46,45 @@ Public Class Form1
 
     Private Sub StartShell()
         Try
-            ' Initialisiere den Process-Objekt
+
             cmdProcess = New Process()
 
-            ' Konfiguriere die Starteinstellungen
+
             With cmdProcess.StartInfo
-                .FileName = "cmd.exe" ' Oder "powershell.exe"
-                .UseShellExecute = False ' Sehr wichtig: Keine Shell zum Starten verwenden
-                .RedirectStandardOutput = True ' Standardausgabe umleiten
-                .RedirectStandardError = True  ' Standardfehler umleiten
-                .RedirectStandardInput = True  ' Standardeingabe umleiten
-                .CreateNoWindow = True         ' Kein separates Konsolenfenster erstellen
-                .StandardOutputEncoding = Encoding.UTF8 ' Wichtig für Umlaute etc.
+                .FileName = "cmd.exe"
+                .UseShellExecute = False
+                .RedirectStandardOutput = True
+                .RedirectStandardError = True
+                .RedirectStandardInput = True
+                .CreateNoWindow = True
+                .StandardOutputEncoding = Encoding.UTF8
                 .StandardErrorEncoding = Encoding.UTF8
             End With
 
-            ' Starten des Prozesses
+
             cmdProcess.Start()
             isShellRunning = True
-            ' UI-Update im UI-Thread
+
             Me.Invoke(Sub()
                           Console.AppendText("Shell gestartet. Geben Sie Befehle ein und drücken Sie Enter oder den Senden-Button." & Environment.NewLine)
                           Console.ScrollToCaret()
                       End Sub)
 
 
-            ' Asynchrones Auslesen der Standardausgabe
+
             AddHandler cmdProcess.OutputDataReceived, AddressOf OutputReceived
             cmdProcess.BeginOutputReadLine()
 
-            ' Asynchrones Auslesen der Standardfehlerausgabe
+
             AddHandler cmdProcess.ErrorDataReceived, AddressOf ErrorReceived
             cmdProcess.BeginErrorReadLine()
 
-            ' Event-Handler für das Beenden des Prozesses
+
             AddHandler cmdProcess.Exited, AddressOf ProcessExited
-            cmdProcess.EnableRaisingEvents = True ' Wichtig, damit das Exited-Event ausgelöst wird
+            cmdProcess.EnableRaisingEvents = True
 
         Catch ex As Exception
-            ' UI-Update im UI-Thread
+
             Me.Invoke(Sub()
                           Console.AppendText($"Fehler beim Starten der Shell: {ex.Message}{Environment.NewLine}")
                           Console.ScrollToCaret()
@@ -96,33 +96,33 @@ Public Class Form1
     Private Sub StopShell()
         If cmdProcess IsNot Nothing AndAlso Not cmdProcess.HasExited Then
             Try
-                ' Befehl "exit" an die Shell senden
+
                 cmdProcess.StandardInput.WriteLine("exit")
-                cmdProcess.WaitForExit(2000) ' 2 Sekunden warten, bis Prozess beendet wird
+                cmdProcess.WaitForExit(2000)
 
                 If Not cmdProcess.HasExited Then
-                    ' Wenn der Prozess nach dem Warten immer noch läuft, ihn zwangsweise beenden
+
                     cmdProcess.Kill()
-                    ' UI-Update im UI-Thread
+
                     Me.Invoke(Sub()
                                   Console.AppendText("Shell zwangsweise beendet." & Environment.NewLine)
                                   Console.ScrollToCaret()
                               End Sub)
                 Else
-                    ' UI-Update im UI-Thread
+
                     Me.Invoke(Sub()
                                   Console.AppendText("Shell sauber beendet." & Environment.NewLine)
                                   Console.ScrollToCaret()
                               End Sub)
                 End If
             Catch ex As Exception
-                ' UI-Update im UI-Thread
+
                 Me.Invoke(Sub()
                               Console.AppendText($"Fehler beim Beenden der Shell: {ex.Message}{Environment.NewLine}")
                               Console.ScrollToCaret()
                           End Sub)
             Finally
-                ' Aufräumen (Handlers entfernen und Prozess entsorgen) - kann direkt erfolgen, da es nicht aus einem Callbak kommt
+
                 RemoveHandler cmdProcess.OutputDataReceived, AddressOf OutputReceived
                 RemoveHandler cmdProcess.ErrorDataReceived, AddressOf ErrorReceived
                 RemoveHandler cmdProcess.Exited, AddressOf ProcessExited
@@ -131,7 +131,7 @@ Public Class Form1
                 isShellRunning = False
             End Try
         Else
-            ' UI-Update im UI-Thread
+
             Me.Invoke(Sub()
                           Console.AppendText("Shell ist nicht aktiv." & Environment.NewLine)
                           Console.ScrollToCaret()
@@ -139,26 +139,25 @@ Public Class Form1
         End If
     End Sub
 
-    ' Callback für die Standardausgabe
+
     Private Sub OutputReceived(sender As Object, e As DataReceivedEventArgs)
-        ' WICHTIG: UI-Updates müssen im UI-Thread erfolgen.
+
         If Not String.IsNullOrEmpty(e.Data) Then
-            ' Überprüfen, ob Invoke erforderlich ist (immer der Fall, wenn aus einem Hintergrundthread auf UI zugegriffen wird)
+
             If Console.InvokeRequired Then
                 Console.Invoke(Sub()
                                    Console.AppendText(e.Data & Environment.NewLine)
                                    Console.ScrollToCaret()
                                End Sub)
             Else
-                ' Dies sollte selten, wenn überhaupt, von einem Hintergrundthread aus aufgerufen werden,
-                ' aber als Fallback, falls der Aufruf doch im UI-Thread landet.
+
                 Console.AppendText(e.Data & Environment.NewLine)
                 Console.ScrollToCaret()
             End If
         End If
     End Sub
 
-    ' Callback für die Standardfehlerausgabe
+
     Private Sub ErrorReceived(sender As Object, e As DataReceivedEventArgs)
         If Not String.IsNullOrEmpty(e.Data) Then
             If Console.InvokeRequired Then
@@ -167,7 +166,7 @@ Public Class Form1
                                    Console.SelectionLength = 0
                                    Console.SelectionColor = Color.Red
                                    Console.AppendText(e.Data & Environment.NewLine)
-                                   Console.SelectionColor = Console.ForeColor ' Farbe zurücksetzen
+                                   Console.SelectionColor = Console.ForeColor
                                    Console.ScrollToCaret()
                                End Sub)
             Else
@@ -175,22 +174,20 @@ Public Class Form1
                 Console.SelectionLength = 0
                 Console.SelectionColor = Color.Red
                 Console.AppendText(e.Data & Environment.NewLine)
-                Console.SelectionColor = Console.ForeColor ' Farbe zurücksetzen
+                Console.SelectionColor = Console.ForeColor
                 Console.ScrollToCaret()
             End If
         End If
     End Sub
 
-    ' Callback, wenn der Prozess beendet wird
     Private Sub ProcessExited(sender As Object, e As EventArgs)
-        ' Alle UI-Updates müssen im UI-Thread erfolgen
+
         Me.Invoke(Sub()
                       Console.AppendText($"Shell-Prozess beendet mit Exit Code: {cmdProcess.ExitCode}{Environment.NewLine}")
                       Console.ScrollToCaret()
                       isShellRunning = False
                       Button1.Text = "Shell starten"
-                      ' Aufräumen (Handlers entfernen und Prozess entsorgen)
-                      ' Diese Entfernung kann hier erfolgen, da Invoke den Kontext switcht.
+
                       RemoveHandler cmdProcess.OutputDataReceived, AddressOf OutputReceived
                       RemoveHandler cmdProcess.ErrorDataReceived, AddressOf ErrorReceived
                       RemoveHandler cmdProcess.Exited, AddressOf ProcessExited
@@ -199,34 +196,30 @@ Public Class Form1
                   End Sub)
     End Sub
 
-    ' Senden eines Befehls an die Shell über den Senden-Button
 
-    ' Senden eines Befehls an die Shell über Enter in der InputTextBox
     Private Sub Console_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Console.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
-            e.Handled = True ' Verhindert den Piepton beim Drücken von Enter
+            e.Handled = True
             SendCommand(sender, e.KeyChar)
         End If
     End Sub
 
     Private Sub SendCommand(sender As Object, command As String)
-        ' Diese Methode wird direkt von UI-Events aufgerufen, ist also bereits im UI-Thread
+
         If cmdProcess IsNot Nothing AndAlso Not cmdProcess.HasExited AndAlso isShellRunning Then
             command = Console.Text.Trim()
             If Not String.IsNullOrEmpty(command) Then
                 Try
-                    ' Befehl in der RichTextBox anzeigen (als Echo)
+
                     Console.SelectionStart = Console.TextLength
                     Console.SelectionLength = 0
-                    Console.SelectionColor = Color.Green ' Befehl grün färben
+                    Console.SelectionColor = Color.Green
                     Console.AppendText($"> {command}{Environment.NewLine}")
-                    Console.SelectionColor = Console.ForeColor ' Farbe zurücksetzen
+                    Console.SelectionColor = Console.ForeColor
 
-                    ' Befehl an die Standardeingabe der Shell senden
                     cmdProcess.StandardInput.WriteLine(command)
-                    Console.Clear() ' Eingabefeld leeren
+                    Console.Clear()
 
-                    ' Scrollen zum Ende der RichTextBox
                     Console.ScrollToCaret()
 
                 Catch ex As Exception
@@ -240,59 +233,82 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        _systemInfoRepository = New SystemInfoRepository()
+        Dim currentInfo As New SystemInfoData(
+            osSystem:=GetOSInformation(),
+            systemType:=Environment.Is64BitOperatingSystem.ToString() & " Bit-System",
+            computerName:=Environment.MachineName,
+            userName:=Environment.UserName,
+            domainName:=Environment.UserDomainName,
+            processorCount:=Environment.ProcessorCount,
+            totalPhysicalMemory:=GetTotalPhysicalMemory(),
+            availablePhysicalMemory:=GetAvailablePhysicalMemory(),
+            hostName:=Dns.GetHostName(),
+            ipAddresses:=GetLocalIPAddresses(),
+            systemDirectory:=Environment.SystemDirectory,
+            programDirectory:=Environment.CurrentDirectory,
+            networkAdapterNames:=GetNetworkAdapterNames(),
+            networkAdapterMacAddresses:=GetNetworkAdapterMacAddresses(),
+            biosVersion:=GetBIOSVersion(),
+            processorInformation:=GetProcessorInformation(),
+            graphicsCardInformation:=GetGraphicsCardInformation()
+        )
+
+
+        Try
+            _systemInfoRepository.SaveSystemInfo(currentInfo)
+            'Console.WriteLine("Systeminformationen erfolgreich über Repository gespeichert.")
+        Catch ex As Exception
+
+            'Console.WriteLine($"Fehler beim Speichern der Systeminformationen über Repository: {ex.Message}")
+        End Try
+
+
         DisplaySystemInformation()
         PopulateHDDBox()
         IsUserAdministrator()
-        FormFAQ.InitializeFaqContent()
+        FormFAQ.InitializeStandardFaqContent()
         GetOSAndRootDirectories()
     End Sub
 
 
     Private Sub DisplaySystemInformation()
-        ' Konfigurieren der ListView
         With SystemView
-            .View = View.Details ' Wichtig für Spaltenansicht
+            .View = View.Details
             .GridLines = True
-            .FullRowSelect = True ' Auswählen der gesamten Zeile
-            .SmallImageList = Me.ImageList1 ' <<< WICHTIG: ImageList zuweisen
-            ' .LargeImageList = Me.ImageList1 ' Falls du View = LargeIcon verwendest
-            .Columns.Clear() ' Vor dem Hinzufügen von Spalten leeren
-            ' Spalten hinzufügen
-            .Columns.Add("Kategorie", 150, HorizontalAlignment.Left)
-            .Columns.Add("Information", 350, HorizontalAlignment.Left) ' Breiter, um längere Texte aufzunehmen
+            .FullRowSelect = True
+            .SmallImageList = Me.ImageList1
+            ' .LargeImageList = Me.ImageList1 
+            .Columns.Clear()
+            .Columns.Add("Category:", 180, HorizontalAlignment.Left)
+            .Columns.Add("Information:", 350, HorizontalAlignment.Left)
         End With
 
-        ' Systeminformationen abrufen und hinzufügen (jetzt mit Icon-Index)
-        ' HINWEIS: Die Reihenfolge der Icons in ImageList1 muss zu diesen Indizes passen!
-        AddSystemInfo("Betriebssystem", GetOSInformation(), ICON_OS)
-        AddSystemInfo("Systemtyp", Environment.Is64BitOperatingSystem.ToString() & " Bit-System", ICON_SYSTEM_TYPE)
-        AddSystemInfo("Computername", Environment.MachineName, ICON_COMPUTER_NAME)
-        AddSystemInfo("Benutzername", Environment.UserName, ICON_USER_NAME)
-        AddSystemInfo("Domainname", Environment.UserDomainName, ICON_DOMAIN_NAME)
-        AddSystemInfo("Anzahl Prozessoren", Environment.ProcessorCount.ToString(), ICON_PROCESSOR_COUNT)
-        AddSystemInfo("Arbeitsspeicher (Physikalisch)", GetTotalPhysicalMemory(), ICON_RAM)
-        AddSystemInfo("Verfügbarer Arbeitsspeicher", GetAvailablePhysicalMemory(), ICON_AVAIL_RAM)
-        AddSystemInfo("Hostname", Dns.GetHostName(), ICON_HOSTNAME)
-        AddSystemInfo("IP-Adressen", GetLocalIPAddresses(), ICON_IP_ADDRESSES)
-        AddSystemInfo("System-Verzeichnis", Environment.SystemDirectory, ICON_SYSTEM_DIR)
-        AddSystemInfo("Programm-Verzeichnis", Environment.CurrentDirectory, ICON_PROGRAM_DIR)
-        AddSystemInfo("Netzwerkkarten (Name)", GetNetworkAdapterNames(), ICON_NETWORK_ADAPTER)
-        AddSystemInfo("Netzwerkkarten (MAC-Adressen)", GetNetworkAdapterMacAddresses(), ICON_MAC_ADDRESS)
-        AddSystemInfo("BIOS-Version", GetBIOSVersion(), ICON_BIOS)
-        AddSystemInfo("Prozessor-Information", GetProcessorInformation(), ICON_PROCESSOR_INFO)
-        AddSystemInfo("Grafikkarte", GetGraphicsCardInformation(), ICON_GRAPHICS_CARD)
+        AddSystemInfo("OS System:", GetOSInformation(), ICON_OS)
+        AddSystemInfo("System-Typ:", Environment.Is64BitOperatingSystem.ToString() & " Bit-System:", ICON_SYSTEM_TYPE)
+        AddSystemInfo("PC/host:", Environment.MachineName, ICON_COMPUTER_NAME)
+        AddSystemInfo("User:", Environment.UserName, ICON_USER_NAME)
+        AddSystemInfo("Domain:", Environment.UserDomainName, ICON_DOMAIN_NAME)
+        AddSystemInfo("Core x :", Environment.ProcessorCount.ToString(), ICON_PROCESSOR_COUNT)
+        AddSystemInfo("RAM (Phys.):", GetTotalPhysicalMemory(), ICON_RAM)
+        AddSystemInfo("RAM (free):", GetAvailablePhysicalMemory(), ICON_AVAIL_RAM)
+        AddSystemInfo("Host:", Dns.GetHostName(), ICON_HOSTNAME)
+        AddSystemInfo("IP-Adress:", GetLocalIPAddresses(), ICON_IP_ADDRESSES)
+        AddSystemInfo("System-dir:", Environment.SystemDirectory, ICON_SYSTEM_DIR)
+        AddSystemInfo("Prog. Dir:", Environment.CurrentDirectory, ICON_PROGRAM_DIR)
+        AddSystemInfo("Network (Name):", GetNetworkAdapterNames(), ICON_NETWORK_ADAPTER)
+        AddSystemInfo("Network (MAC-Adressen):", GetNetworkAdapterMacAddresses(), ICON_MAC_ADDRESS)
+        AddSystemInfo("BIOS V.:", GetBIOSVersion(), ICON_BIOS)
+        AddSystemInfo("CPU-Info", GetProcessorInformation(), ICON_PROCESSOR_INFO)
+        AddSystemInfo("GPU-Info", GetGraphicsCardInformation(), ICON_GRAPHICS_CARD)
     End Sub
-
-    ' Hilfsfunktion zum Hinzufügen von Einträgen zur ListView (JETZT MIT ICON-INDEX)
     Private Sub AddSystemInfo(ByVal category As String, ByVal information As String, ByVal imageIndex As Integer)
-        Dim item As New ListViewItem(category, imageIndex) ' Icon-Index hier übergeben
+        Dim item As New ListViewItem(category, imageIndex)
         item.SubItems.Add(information)
         SystemView.Items.Add(item)
     End Sub
 
-
-
-    ' Hilfsfunktion zum Hinzufügen von Einträgen zur ListView
     Private Sub AddSystemInfo(ByVal category As String, ByVal information As String)
         Dim item As New ListViewItem(category)
         item.SubItems.Add(information)
@@ -300,7 +316,7 @@ Public Class Form1
     End Sub
     Private Function EnsureAdminRightsAndCreateDirectory(directoryPath As String) As Boolean
         If Not IsUserAdministrator() Then
-            ' Starte die Anwendung mit Admin-Rechten neu
+
             Dim currentProcessInfo As New ProcessStartInfo With {
                 .FileName = Application.ExecutablePath,
                 .Arguments = "",
@@ -334,14 +350,13 @@ Public Class Form1
         Dim principal As New System.Security.Principal.WindowsPrincipal(identity)
         Return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator)
     End Function
-    ' NEU: Befüllt die HDDBox mit Festplatteninformationen
     Private Sub PopulateHDDBox()
-        HDDBox.Items.Clear() ' Vor dem Befüllen leeren
+        HDDBox.Items.Clear()
 
         Try
             For Each d As DriveInfo In DriveInfo.GetDrives()
                 If d.IsReady Then
-                    ' Anzeigename in der ListBox
+
                     HDDBox.Items.Add($"{d.Name} ({d.DriveType}) - {d.TotalSize / (1024 * 1024 * 1024):N2} GB")
                 Else
                     HDDBox.Items.Add($"{d.Name} ({d.DriveType}) - Nicht bereit")
@@ -352,15 +367,12 @@ Public Class Form1
         End Try
     End Sub
 
-    ' NEU: Event-Handler für die Auswahländerung in der HDDBox
     Private Sub HDDBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HDDBox.SelectedIndexChanged
         UpdateHDDDetails()
     End Sub
 
-    ' NEU: Aktualisiert HDDLabel und HDDBar1 basierend auf der Auswahl in HDDBox
     Private Sub UpdateHDDDetails()
         If HDDBox.SelectedIndex = -1 Then
-            ' Nichts ausgewählt
             HDDLabel.Text = "Kein Laufwerk ausgewählt."
             HddBar1.Value = 0
             HddBar1.Maximum = 100
@@ -368,31 +380,25 @@ Public Class Form1
         End If
 
         Try
-            ' Den ausgewählten Laufwerksnamen extrahieren (z.B. "C:\")
-            Dim selectedItemText As String = HDDBox.SelectedItem.ToString()
-            Dim driveName As String = selectedItemText.Substring(0, length:=selectedItemText.IndexOf(" "c)) ' Nimmt den Teil vor dem ersten Leerzeichen
 
+            Dim selectedItemText As String = HDDBox.SelectedItem.ToString()
+            Dim driveName As String = selectedItemText.Substring(0, length:=selectedItemText.IndexOf(" "c))
             Dim selectedDrive As New DriveInfo(driveName)
 
             If selectedDrive.IsReady Then
                 Dim totalSizeGB As Double = selectedDrive.TotalSize / (1024 * 1024 * 1024)
                 Dim freeSpaceGB As Double = selectedDrive.AvailableFreeSpace / (1024 * 1024 * 1024)
                 Dim usedSpaceGB As Double = totalSizeGB - freeSpaceGB
-
-                ' HDDLabel aktualisieren
                 HDDLabel.Text = $"Laufwerk: {selectedDrive.Name} ({selectedDrive.DriveType}){Environment.NewLine}" &
                                 $"Gesamt: {totalSizeGB:N2} GB{Environment.NewLine}" &
                                 $"Frei: {freeSpaceGB:N2} GB ({freeSpaceGB / totalSizeGB:P2}){Environment.NewLine}" &
                                 $"Belegt: {usedSpaceGB:N2} GB ({usedSpaceGB / totalSizeGB:P2})"
-
-                ' HDDBar1 aktualisieren
-                HddBar1.Maximum = 100 ' Prozentuale Anzeige
+                HddBar1.Maximum = 100
                 If totalSizeGB > 0 Then
                     HddBar1.Value = CInt((usedSpaceGB / totalSizeGB) * 100)
                 Else
                     HddBar1.Value = 0
                 End If
-                ' Sicherstellen, dass der Wert nicht außerhalb des Bereichs liegt
                 If HddBar1.Value > HddBar1.Maximum Then HddBar1.Value = HddBar1.Maximum
                 If HddBar1.Value < HddBar1.Minimum Then HddBar1.Value = HddBar1.Minimum
 
@@ -406,10 +412,6 @@ Public Class Form1
             HddBar1.Value = 0
         End Try
     End Sub
-
-
-    ' Region: Funktionen zum Abrufen spezifischer Systeminformationen (WMI-basiert)
-    ' ... (Der Rest der WMI-Funktionen bleibt unverändert) ...
 
     Private Function GetOSInformation() As String
         Try
@@ -457,7 +459,7 @@ Public Class Form1
         Try
             Dim host As IPHostEntry = Dns.GetHostEntry(Dns.GetHostName())
             For Each ip As IPAddress In host.AddressList
-                If ip.AddressFamily = Sockets.AddressFamily.InterNetwork Then ' Nur IPv4-Adressen
+                If ip.AddressFamily = Sockets.AddressFamily.InterNetwork Then
                     ipAddresses.Add(ip.ToString())
                 End If
             Next
@@ -573,7 +575,7 @@ Public Class Form1
         Dim res As DialogResult = MessageBox.Show(Me, "Möchten Sie die Anwendung wirklich schließen?", "Beenden", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
         If res = DialogResult.OK Then
             If isShellRunning Then
-                StopShell() ' Shell sauber beenden, bevor das Formular schließt
+                StopShell()
             End If
         Else
             e.Cancel = True
@@ -584,35 +586,17 @@ Public Class Form1
 
     Private Sub GetOSAndRootDirectories()
         Try
-            ' 1. Systemverzeichnis (z.B. C:\Windows)
+
             Dim systemDirectory As String = Environment.SystemDirectory
 
-            ' 2. Root-Verzeichnis des Systemlaufwerks (z.B. C:\)
-            ' Man kann den Root-Pfad aus dem Systemverzeichnis ableiten
             Dim rootDirectory As String = Path.GetPathRoot(systemDirectory)
 
-            ' Anzeigen in Ihrer RichTextBox "Console"
-            ' Me.Invoke(Sub()
-            'Console.AppendText($"System-Verzeichnis: {systemDirectory}{Environment.NewLine}")
-            'Console.AppendText($"Root-Verzeichnis des Systemlaufwerks: {rootDirectory}{Environment.NewLine}")
-            'Console.ScrollToCaret()
-            'End Sub)'
             My.Settings.OS_RootDir = rootDirectory
             MessageBox.Show($"OS Verzeichniss: {rootDirectory}")
         Catch ex As Exception
-            ' Me.Invoke(Sub()
-            '  Console.AppendText($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}{Environment.NewLine}")
-            ' Console.ScrollToCaret()
-            ' End Sub)
+
             MessageBox.Show($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}")
         End Try
-    End Sub
-
-
-
-
-    Private Sub ÜberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜberToolStripMenuItem.Click
-        Dialog1.Show()
     End Sub
 
     Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -633,7 +617,7 @@ Public Class Form1
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim res As Boolean = IsUserAdministrator()
-        ' Optional: Eine Meldung in Ihrer RichTextBox "Console" anzeigen
+
         Dim programPath As String = My.Settings.OS_RootDir & "Windows\System32\diskmgmt.msc"
         If res = True Then
 
@@ -641,21 +625,6 @@ Public Class Form1
                 Console.Visible = True
             End If
             Try
-                ' Pfad zum externen Programm
-                ' Beispiel 1: Notepad öffnen
-                ' Dim programPath As String = "diskmgmt.msc"
-
-                ' Dim root() As String = GetOSAndRootDirectories()
-
-
-                ' Beispiel 3: Ein Programm mit Argumenten (z.B. eine Textdatei in Notepad öffnen)
-                ' Dim programPath As String = "notepad.exe"
-                ' Dim arguments As String = "C:\Pfad\Zu\Meiner\Datei.txt"
-                ' Process.Start(programPath, arguments)
-
-                ' Starten des Programms
-
-
                 Me.Invoke(Sub()
                               Process.Start(programPath)
                               SendCommand(sender, $"cd Windows\System32 {Environment.NewLine}")
@@ -664,7 +633,6 @@ Public Class Form1
                           End Sub)
 
             Catch ex As Exception
-                ' Fehlerbehandlung: Wenn das Programm nicht gefunden wird oder ein anderer Fehler auftritt
                 Dim errInt As String = ex.StackTrace
                 errorList.Add(errInt & "," & Date.Now)
                 If errorList IsNot Nothing Or errorList.Count > 0 Then
@@ -673,9 +641,6 @@ Public Class Form1
                     MessageBox.Show(errInt)
                 End If
 
-
-
-
             End Try
         ElseIf res = False Then
             EnsureAdminRightsAndCreateDirectory(programPath)
@@ -683,18 +648,85 @@ Public Class Form1
 
         End If
     End Sub
+    Private Sub ExportSystemInfoAsXML(filePath As String)
+        Try
+            ' Option 1: Exportiere nur die aktuelle, zuletzt gesammelte Systeminformation
+            ' Erstellen Sie ein SystemInfoData-Objekt mit den aktuellen Daten
+            Dim currentInfo As New SystemInfoData(
+                osSystem:=GetOSInformation(),
+                systemType:=Environment.Is64BitOperatingSystem.ToString() & " Bit-System",
+                computerName:=Environment.MachineName,
+                userName:=Environment.UserName,
+                domainName:=Environment.UserDomainName,
+                processorCount:=Environment.ProcessorCount,
+                totalPhysicalMemory:=GetTotalPhysicalMemory(),
+                availablePhysicalMemory:=GetAvailablePhysicalMemory(),
+                hostName:=Dns.GetHostName(),
+                ipAddresses:=GetLocalIPAddresses(),
+                systemDirectory:=Environment.SystemDirectory,
+                programDirectory:=Environment.CurrentDirectory,
+                networkAdapterNames:=GetNetworkAdapterNames(),
+                networkAdapterMacAddresses:=GetNetworkAdapterMacAddresses(),
+                biosVersion:=GetBIOSVersion(),
+                processorInformation:=GetProcessorInformation(),
+                graphicsCardInformation:=GetGraphicsCardInformation()
+            )
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+            ' Erstelle das XML-Dokument
+            Dim xmlDoc As New XDocument(
+                New XDeclaration("1.0", "utf-8", "yes"),
+                New XElement("SystemInformationExport",
+                    New XAttribute("ExportTimestamp", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")), ' ISO 8601 UTC
+                    CreateSystemInfoElement(currentInfo)
+                )
+            )
 
+            ' Option 2 (erweitert): Exportiere alle oder die letzten N Einträge aus der Datenbank
+            ' Wenn Sie alle bisher gesammelten Daten exportieren möchten, holen Sie diese aus dem Repository:
+            ' Dim allReadings As List(Of SystemInfoData) = _systemInfoRepository.GetLastSystemInfoReadings(Integer.MaxValue) ' Alle Einträge
+            ' Dim xmlDoc As New XDocument(
+            '     New XDeclaration("1.0", "utf-8", "yes"),
+            '     New XElement("SystemInformationHistoryExport",
+            '         New XAttribute("ExportTimestamp", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")),
+            '         From info In allReadings Select CreateSystemInfoElement(info)
+            '     )
+            ' )
+
+
+            ' Speichere das XML-Dokument
+            xmlDoc.Save(filePath)
+
+            MessageBox.Show($"Systeminformationen erfolgreich nach '{filePath}' exportiert.", "Export erfolgreich", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            MessageBox.Show($"Fehler beim Exportieren der Systeminformationen: {ex.Message}", "Exportfehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"XML-Exportfehler: {ex.ToString()}")
+        End Try
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-
-    End Sub
+    ' Hilfsmethode zur Erstellung eines XElement für ein SystemInfoData-Objekt
+    Private Function CreateSystemInfoElement(data As SystemInfoData) As XElement
+        Return New XElement("SystemInfoEntry",
+            New XElement("Timestamp", data.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")),
+            New XElement("OSSystem", data.OSSystem),
+            New XElement("SystemType", data.SystemType),
+            New XElement("ComputerName", data.ComputerName),
+            New XElement("UserName", data.UserName),
+            New XElement("DomainName", data.DomainName),
+            New XElement("ProcessorCount", data.ProcessorCount),
+            New XElement("TotalPhysicalMemory", data.TotalPhysicalMemory),
+            New XElement("AvailablePhysicalMemory", data.AvailablePhysicalMemory),
+            New XElement("HostName", data.HostName),
+            New XElement("IPAddresses", data.IPAddresses),
+            New XElement("SystemDirectory", data.SystemDirectory),
+            New XElement("ProgramDirectory", data.ProgramDirectory),
+            New XElement("NetworkAdapterNames", data.NetworkAdapterNames),
+            New XElement("NetworkAdapterMacAddresses", data.NetworkAdapterMacAddresses),
+            New XElement("BIOSVersion", data.BIOSVersion),
+            New XElement("ProcessorInformation", data.ProcessorInformation),
+            New XElement("GraphicsCardInformation", data.GraphicsCardInformation)
+        )
+    End Function
     Private Sub SystemINCToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles SystemINCToolStripMenuItem.Click
         Dialog1.Show()
     End Sub
@@ -704,7 +736,40 @@ Public Class Form1
     End Sub
 
     Private Sub HilfeToolStripMenuItem1_Click_1(sender As Object, e As EventArgs) Handles HilfeToolStripMenuItem1.Click
-        FormFAQ.Show()
+        FormFAQ.ShowDialog()
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+        Dim getItem As ToolStripItem = e.ClickedItem
+        If getItem IsNot Nothing Then
+            Select Case getItem.Name
+                Case "BeendenToolStripMenuItem"
+                    BeendenToolStripMenuItem_Click(sender, e)
+                Case "HilfeToolStripMenuItem"
+                    HilfeToolStripMenuItem_Click(sender, e)
+                Case "SystemINCToolStripMenuItem"
+                    SystemINCToolStripMenuItem_Click_1(sender, e)
+                Case "EULAToolStripMenuItem"
+                    EULAToolStripMenuItem_Click(sender, e)
+                Case "HilfeToolStripMenuItem1"
+                    HilfeToolStripMenuItem1_Click_1(sender, e)
+                Case "ExportSysteminformationAsXMLToolStripMenuItem"
+                    ExportSysteminformationAsXMLToolStripMenuItem_Click(sender, e)
+                Case "Export as.."
+
+            End Select
+        End If
+    End Sub
+
+    Private Sub ExportSysteminformationAsXMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportSysteminformationAsXMLToolStripMenuItem.Click
+        Dim exportDialog As New SaveFileDialog()
+        exportDialog.Filter = "XML-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*"
+        exportDialog.Title = "Systeminformationen exportieren"
+        exportDialog.FileName = "SystemInfoExport_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".xml" ' Vorgeschlagener Dateiname
+
+        If exportDialog.ShowDialog() = DialogResult.OK Then
+            ExportSystemInfoAsXML(exportDialog.FileName)
+        End If
     End Sub
 End Class
 

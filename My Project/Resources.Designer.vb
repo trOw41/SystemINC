@@ -93,6 +93,16 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _004_computer_science() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("004-computer-science", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property _004_upgrade() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("004-upgrade", resourceCulture)
@@ -146,6 +156,16 @@ Namespace My.Resources
         Friend ReadOnly Property _009_technology() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("009-technology", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _010_recommendations() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("010-recommendations", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -276,6 +296,16 @@ Namespace My.Resources
         Friend ReadOnly Property _028_faq() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("028-faq", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _031_computer() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("031-computer", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
