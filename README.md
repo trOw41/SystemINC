@@ -47,7 +47,7 @@ SystemINC entstand aus dem Bedürfnis heraus, zentrale Systeminformationen an ei
 
 1.  **Repository klonen**:
     ```bash
-    git clone [https://github.com/IhrBenutzername/SystemINC.git](https://github.com/IhrBenutzername/SystemINC.git)
+    git clone [https://github.com/trOw41/SystemINC.git](https://github.com/SystemINC.git)
     cd SystemINC
     ```
 2.  **Visual Studio öffnen**: Öffnen Sie die `.sln`-Datei in Visual Studio (empfohlen: Visual Studio 2019 oder neuer).
