@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class About
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -29,7 +29,7 @@ Partial Class About
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(About))
         TableLayoutPanel = New TableLayoutPanel()
@@ -61,12 +61,12 @@ Partial Class About
         TableLayoutPanel.Margin = New Padding(4, 3, 4, 3)
         TableLayoutPanel.Name = "TableLayoutPanel"
         TableLayoutPanel.RowCount = 6
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
         TableLayoutPanel.Size = New Size(463, 298)
         TableLayoutPanel.TabIndex = 0
         ' 
@@ -93,7 +93,7 @@ Partial Class About
         LabelProductName.Size = New Size(401, 20)
         LabelProductName.TabIndex = 0
         LabelProductName.Text = "Produktname"
-        LabelProductName.TextAlign = ContentAlignment.MiddleLeft
+        LabelProductName.TextAlign = Drawing.ContentAlignment.MiddleLeft
         ' 
         ' LabelVersion
         ' 
@@ -105,7 +105,7 @@ Partial Class About
         LabelVersion.Size = New Size(401, 20)
         LabelVersion.TabIndex = 0
         LabelVersion.Text = "Version"
-        LabelVersion.TextAlign = ContentAlignment.MiddleLeft
+        LabelVersion.TextAlign = Drawing.ContentAlignment.MiddleLeft
         ' 
         ' LabelCopyright
         ' 
@@ -117,7 +117,7 @@ Partial Class About
         LabelCopyright.Size = New Size(401, 20)
         LabelCopyright.TabIndex = 0
         LabelCopyright.Text = "Copyright"
-        LabelCopyright.TextAlign = ContentAlignment.MiddleLeft
+        LabelCopyright.TextAlign = Drawing.ContentAlignment.MiddleLeft
         ' 
         ' LabelCompanyName
         ' 
@@ -129,7 +129,7 @@ Partial Class About
         LabelCompanyName.Size = New Size(401, 20)
         LabelCompanyName.TabIndex = 0
         LabelCompanyName.Text = "Firmenname"
-        LabelCompanyName.TextAlign = ContentAlignment.MiddleLeft
+        LabelCompanyName.TextAlign = Drawing.ContentAlignment.MiddleLeft
         ' 
         ' EulaBox
         ' 
@@ -158,7 +158,7 @@ Partial Class About
         ' 
         ' About
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = OKButton
         ClientSize = New Size(483, 318)

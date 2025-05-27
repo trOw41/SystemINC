@@ -192,43 +192,13 @@ Public Class Form1
     End Sub
 
 
-    Private Sub Console_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Console.KeyPress
+    Private Sub Console_KeyPress(sender As Object, e As KeyPressEventArgs)
         If e.KeyChar = ChrW(Keys.Enter) Then
             e.Handled = True
-            SendCommand(sender, e.KeyChar)
+            SendCommand()
         End If
     End Sub
-
-    Private Sub SendCommand(sender As Object, command As String)
-
-        If cmdProcess IsNot Nothing AndAlso Not cmdProcess.HasExited AndAlso isShellRunning Then
-            command = Console.Text.Trim()
-            If Not String.IsNullOrEmpty(command) Then
-                Try
-
-                    Console.SelectionStart = Console.TextLength
-                    Console.SelectionLength = 0
-                    Console.SelectionColor = Color.Green
-                    Console.AppendText($"> {command}{Environment.NewLine}")
-                    Console.SelectionColor = Console.ForeColor
-
-                    cmdProcess.StandardInput.WriteLine(command)
-                    Console.Clear()
-
-                    Console.ScrollToCaret()
-
-                Catch ex As Exception
-                    Console.AppendText($"Fehler beim Senden des Befehls: {ex.Message}{Environment.NewLine}")
-                End Try
-            End If
-        Else
-            Console.AppendText("Shell ist nicht gestartet oder wurde beendet." & Environment.NewLine)
-            Console.ScrollToCaret()
-        End If
-    End Sub
-
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         _systemInfoRepository = New SystemInfoRepository()
         Dim currentInfo As New SystemInfoData(
             osSystem:=GetOSInformation(),
@@ -598,15 +568,17 @@ Public Class Form1
         FormFAQ.Show()
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         If Not Console.Visible = True Then
             Console.Visible = True
+            TextBox1.Visible = True
         Else
             Console.Visible = False
+            TextBox1.Visible = False
         End If
     End Sub
 
@@ -620,13 +592,7 @@ Public Class Form1
                 Console.Visible = True
             End If
             Try
-                Me.Invoke(Sub()
-                              Process.Start(programPath)
-                              SendCommand(sender, $"cd Windows\System32 {Environment.NewLine}")
-                              SendCommand(sender, $"dir {Environment.NewLine}")
-                              SendCommand(sender, $"cmd.exe {Environment.NewLine}")
-                          End Sub)
-
+                Process.Start(programPath)
             Catch ex As Exception
                 Dim errInt As String = ex.StackTrace
 
@@ -786,6 +752,48 @@ Public Class Form1
             UpdateHDDDetails() ' Aktualisieren Sie die Details des ausgewählten Laufwerks
         Else
             HDDLabel.Text = "Keine Laufwerke gefunden."
+        End If
+    End Sub
+
+
+
+    Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox1.KeyPress
+        ' Prüfen, ob die gedrückte Taste die Enter-Taste ist (ASCII-Wert 13)
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            ' Sendet den Befehl
+            SendCommand()
+
+            ' Verhindert, dass die Enter-Taste selbst in die Textbox eingefügt wird
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub SendCommand()
+
+        If cmdProcess IsNot Nothing AndAlso Not cmdProcess.HasExited AndAlso isShellRunning Then
+            Dim command As String = TextBox1.Text.Trim()
+            If Not String.IsNullOrEmpty(command) Then
+                Try
+
+                    Console.SelectionColor = Color.FloralWhite
+                    Console.AppendText($"> {command}{Environment.NewLine}")
+                    Console.SelectionColor = Console.ForeColor
+
+                    ' Befehl an die Standardeingabe der Shell senden
+                    cmdProcess.StandardInput.WriteLine(command)
+                    TextBox1.Clear() ' Eingabefeld leeren
+
+                    ' Scrollen zum Ende der RichTextBox
+                    Console.ScrollToCaret() ' Sicherstellen, dass 'Console' hier der Name Ihrer RichTextBox ist
+
+                Catch ex As Exception
+                    ' Beispiel: rtbConsole.AppendText($"Fehler beim Senden des Befehls: {ex.Message}{Environment.NewLine}")
+                    Console.AppendText($"Fehler beim Senden des Befehls: {ex.Message}{Environment.NewLine}")
+                End Try
+            End If
+        Else
+            ' Beispiel: rtbConsole.AppendText("Shell ist nicht gestartet oder wurde beendet." & Environment.NewLine)
+            Console.AppendText("Shell ist nicht gestartet oder wurde beendet." & Environment.NewLine)
         End If
     End Sub
 End Class
