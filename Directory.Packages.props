@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Azure.Identity" Version="1.14.0" />
+    <PackageVersion Include="Grapecity.DataVisualization" Version="0.1.248" />
+    <PackageVersion Include="GrapeCity.DataVisualization.Chart" Version="0.4.136" />
+    <PackageVersion Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.0-preview1.25120.4" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.119" />
+    <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageVersion Include="System.Data.SQLite.EF6" Version="1.0.119" />
+    <PackageVersion Include="System.Drawing.Common" Version="10.0.0-preview.4.25258.110" />
+    <PackageVersion Include="System.Management" Version="10.0.0-preview.4.25258.110" />
+  </ItemGroup>
+</Project>

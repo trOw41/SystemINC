@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.Windows.Forms
 
 Public Class Dialog1
     Private _displayText As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "discription.txt")

@@ -1,5 +1,4 @@
-﻿Imports System.Drawing.Text
-Imports System.IO
+﻿Imports System.IO
 Public NotInheritable Class About
 
 

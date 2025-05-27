@@ -1,7 +1,6 @@
 ﻿' SystemInfoRepository.vb
 Imports System.Data.SQLite
-Imports System.IO
-Imports System.Collections.Generic ' Für List(Of T)
+Imports System.IO ' Für List(Of T)
 
 Public Class SystemInfoRepository
 

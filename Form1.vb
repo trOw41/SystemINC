@@ -1,11 +1,6 @@
-﻿Imports System.ComponentModel.Design
-Imports System.Diagnostics
-Imports System.IO
+﻿Imports System.IO
 Imports System.Net
 Imports System.Text
-Imports Windows.Foundation.Diagnostics
-Imports System.Exception
-Imports System.Reflection.Emit
 
 
 Public Class Form1
@@ -629,13 +624,14 @@ Public Class Form1
                               Process.Start(programPath)
                               SendCommand(sender, $"cd Windows\System32 {Environment.NewLine}")
                               SendCommand(sender, $"dir {Environment.NewLine}")
-                              SendCommand(sender, $"diskmgmt.msc {Environment.NewLine}")
+                              SendCommand(sender, $"cmd.exe {Environment.NewLine}")
                           End Sub)
 
             Catch ex As Exception
                 Dim errInt As String = ex.StackTrace
-                errorList.Add(errInt & "," & Date.Now)
-                If errorList IsNot Nothing Or errorList.Count > 0 Then
+
+                If errorList Is Nothing Or errorList IsNot Nothing Then
+                    errorList.Add(errInt & "," & Date.Now)
                     Label1.Text = $"Fehler beim Starten des Programms:" & ex.StackTrace & $" |Err.Code: {errInt}"
                 Else
                     MessageBox.Show(errInt)
@@ -650,8 +646,6 @@ Public Class Form1
     End Sub
     Private Sub ExportSystemInfoAsXML(filePath As String)
         Try
-            ' Option 1: Exportiere nur die aktuelle, zuletzt gesammelte Systeminformation
-            ' Erstellen Sie ein SystemInfoData-Objekt mit den aktuellen Daten
             Dim currentInfo As New SystemInfoData(
                 osSystem:=GetOSInformation(),
                 systemType:=Environment.Is64BitOperatingSystem.ToString() & " Bit-System",
@@ -672,39 +666,32 @@ Public Class Form1
                 graphicsCardInformation:=GetGraphicsCardInformation()
             )
 
-            ' Erstelle das XML-Dokument
             Dim xmlDoc As New XDocument(
                 New XDeclaration("1.0", "utf-8", "yes"),
+                New XProcessingInstruction("xml-stylesheet", "type='text/xsl' href='SystemInfoExport.xsl'"),
                 New XElement("SystemInformationExport",
-                    New XAttribute("ExportTimestamp", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")), ' ISO 8601 UTC
+                    New XAttribute("ExportTimestamp", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")),
                     CreateSystemInfoElement(currentInfo)
                 )
             )
 
-            ' Option 2 (erweitert): Exportiere alle oder die letzten N Einträge aus der Datenbank
-            ' Wenn Sie alle bisher gesammelten Daten exportieren möchten, holen Sie diese aus dem Repository:
-            ' Dim allReadings As List(Of SystemInfoData) = _systemInfoRepository.GetLastSystemInfoReadings(Integer.MaxValue) ' Alle Einträge
-            ' Dim xmlDoc As New XDocument(
-            '     New XDeclaration("1.0", "utf-8", "yes"),
-            '     New XElement("SystemInformationHistoryExport",
-            '         New XAttribute("ExportTimestamp", DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")),
-            '         From info In allReadings Select CreateSystemInfoElement(info)
-            '     )
-            ' )
-
-
-            ' Speichere das XML-Dokument
             xmlDoc.Save(filePath)
 
-            MessageBox.Show($"Systeminformationen erfolgreich nach '{filePath}' exportiert.", "Export erfolgreich", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            'Öffnen der exportierten XML-Datei 
+            Try
+                Process.Start("explorer.exe", filePath)
+                MessageBox.Show($"Systeminformationen erfolgreich nach '{filePath}' exportiert und geöffnet.", "Export erfolgreich", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch exOpenFile As Exception
+                MessageBox.Show($"Systeminformationen erfolgreich nach '{filePath}' exportiert, konnte aber nicht automatisch geöffnet werden: {exOpenFile.Message}", "Export erfolgreich (Öffnen fehlgeschlagen)", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Debug.WriteLine($"Fehler beim automatischen Öffnen der XML-Datei: {exOpenFile.Message}")
+            End Try
         Catch ex As Exception
             MessageBox.Show($"Fehler beim Exportieren der Systeminformationen: {ex.Message}", "Exportfehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Debug.WriteLine($"XML-Exportfehler: {ex.ToString()}")
+            Debug.WriteLine($"XML-Exportfehler: {ex.Message}")
         End Try
     End Sub
 
-    ' Hilfsmethode zur Erstellung eines XElement für ein SystemInfoData-Objekt
+
     Private Function CreateSystemInfoElement(data As SystemInfoData) As XElement
         Return New XElement("SystemInfoEntry",
             New XElement("Timestamp", data.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")),
@@ -762,13 +749,43 @@ Public Class Form1
     End Sub
 
     Private Sub ExportSysteminformationAsXMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportSysteminformationAsXMLToolStripMenuItem.Click
-        Dim exportDialog As New SaveFileDialog()
-        exportDialog.Filter = "XML-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*"
-        exportDialog.Title = "Systeminformationen exportieren"
-        exportDialog.FileName = "SystemInfoExport_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".xml" ' Vorgeschlagener Dateiname
+        Dim exportDialog As New SaveFileDialog With {
+            .Filter = "XML-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*",
+            .Title = "Systeminformationen exportieren",
+            .FileName = "SystemInfoExport_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".xml"
+        }
 
         If exportDialog.ShowDialog() = DialogResult.OK Then
-            ExportSystemInfoAsXML(exportDialog.FileName)
+            Dim destinationFilePath As String = exportDialog.FileName
+            Dim destinationDirectory As String = Path.GetDirectoryName(destinationFilePath)
+            Dim sourceXslPath As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SystemInfoExport.xsl")
+            Dim destinationXslPath As String = Path.Combine(destinationDirectory, "SystemInfoExport.xsl")
+            Try
+
+                If File.Exists(sourceXslPath) Then
+                    File.Copy(sourceXslPath, destinationXslPath, True)
+                    MessageBox.Show($"XSLT-Datei kopiert nach: {destinationXslPath}")
+                Else
+                    MessageBox.Show("Warnung: XSLT-Stylesheet 'SystemInfoExport.xsl' nicht gefunden. Die exportierte XML-Datei wird im Browser unformatiert angezeigt.", "Warnung", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+
+                ExportSystemInfoAsXML(destinationFilePath)
+            Catch ex As Exception
+                MessageBox.Show($"Fehler beim Kopieren der XSLT-Datei oder Export: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Debug.WriteLine($"XSLT-Kopierfehler: {ex.Message}")
+            End Try
+        End If
+    End Sub
+
+
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Optional: Hier können Sie Code hinzufügen, der beim Anzeigen des Formulars ausgeführt werden soll.
+        ' Zum Beispiel, um die Konsole standardmäßig anzuzeigen.
+        If HDDBox.Items.Count > 0 Then
+            HDDBox.SelectedIndex = 0 ' Wählen Sie das erste Laufwerk aus, wenn verfügbar
+            UpdateHDDDetails() ' Aktualisieren Sie die Details des ausgewählten Laufwerks
+        Else
+            HDDLabel.Text = "Keine Laufwerke gefunden."
         End If
     End Sub
 End Class

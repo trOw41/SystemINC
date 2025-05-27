@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports System.Xml.Linq
-Imports System.IO
+﻿Imports System.IO
 
 Public Class FormFAQ
 
