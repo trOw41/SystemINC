@@ -130,6 +130,9 @@
   <data name="020-computer-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\020-computer-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="010-recommendations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\010-recommendations.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="004-computer-science" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\004-computer-science.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,6 +141,9 @@
   </data>
   <data name="011-warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\011-warning1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="018-information-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\018-information-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="007-update" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\007-update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -167,14 +173,14 @@
   <data name="008-repair" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\008-repair.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="018-biometric-identification" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\018-biometric-identification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="018-information-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\018-information-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="016-shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\016-shield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="002-tablet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\002-tablet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="010-stethoscope" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\010-stethoscope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="028-faq" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\028-faq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -188,9 +194,6 @@
   <data name="006-restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\006-restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="002-tablet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\002-tablet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="031-computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\031-computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -200,10 +203,10 @@
   <data name="019-laptop-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\019-laptop-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="010-stethoscope" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\010-stethoscope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="018-biometric-identification" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\018-biometric-identification.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="010-recommendations" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\010-recommendations.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="011-system-administration" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\011-system-administration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -1,6 +1,8 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports System.Windows.Forms.ListView
+Imports Windows.Media.Protection.PlayReady
 
 
 Public Class Form1
@@ -28,13 +30,16 @@ Public Class Form1
     Private Const ICON_PROCESSOR_INFO As Integer = 15
     Private Const ICON_GRAPHICS_CARD As Integer = 16
     Private _systemInfoRepository As SystemInfoRepository
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Public Version As String = Application.ProductVersion.ToString()
+    Public Const VersionNumber As String = "1.0.0" ' Beispiel für eine Versionsnummer, kann angepasst werden
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles SHButton.Click
         If Not isShellRunning Then
             StartShell()
-            Button1.Text = "Shell beenden"
+            SHButton.Text = "Shell beenden"
         Else
             StopShell()
-            Button1.Text = "Shell starten"
+            SHButton.Text = "Shell starten"
         End If
 
     End Sub
@@ -181,7 +186,7 @@ Public Class Form1
                       Console.AppendText($"Shell-Prozess beendet mit Exit Code: {cmdProcess.ExitCode}{Environment.NewLine}")
                       Console.ScrollToCaret()
                       isShellRunning = False
-                      Button1.Text = "Shell starten"
+                      SHButton.Text = "Shell starten"
 
                       RemoveHandler cmdProcess.OutputDataReceived, AddressOf OutputReceived
                       RemoveHandler cmdProcess.ErrorDataReceived, AddressOf ErrorReceived
@@ -219,16 +224,22 @@ Public Class Form1
             processorInformation:=GetProcessorInformation(),
             graphicsCardInformation:=GetGraphicsCardInformation()
         )
-
-
         Try
             _systemInfoRepository.SaveSystemInfo(currentInfo)
-            'Console.WriteLine("Systeminformationen erfolgreich über Repository gespeichert.")
         Catch ex As Exception
-
-            'Console.WriteLine($"Fehler beim Speichern der Systeminformationen über Repository: {ex.Message}")
+            MessageBox.Show($"Fehler beim Speichern der Systeminformationen: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"SystemInfoRepository Fehler: {ex.Message}")
+        Finally
+            _systemInfoRepository.ToString() ' Sicherstellen, dass das Repository initialisiert wird
         End Try
-
+        Try
+            Label2.Text = Application.ProductName & " - " & Application.ProductVersion & " - " & My.Computer.Info.InstalledUICulture.ToString() & " - " & My.Computer.Info.OSFullName & " - " & My.Computer.Info.OSPlatform & " - " & My.Computer.Info.OSVersion.ToString()
+        Catch ex As Exception
+            Label2.Text = Application.ProductName & " - Fehler beim Abrufen der Versionsinformationen"
+        End Try
+        Label2.EndInvoke(Label2.BeginInvoke(New Action(Sub()
+                                                           Label2.Text = Application.ProductName & vbCrLf & $"v.{VersionNumber}"
+                                                       End Sub)))
 
         DisplaySystemInformation()
         PopulateHDDBox()
@@ -332,12 +343,8 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub HDDBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HDDBox.SelectedIndexChanged
-        UpdateHDDDetails()
-    End Sub
-
     Private Sub UpdateHDDDetails()
-        If HDDBox.SelectedIndex = -1 Then
+        If HDDBox.SelectedIndex = -1 OrElse HDDBox.Items.Count = 0 Then
             HDDLabel.Text = "Kein Laufwerk ausgewählt."
             HddBar1.Value = 0
             HddBar1.Maximum = 100
@@ -346,8 +353,16 @@ Public Class Form1
 
         Try
 
-            Dim selectedItemText As String = HDDBox.SelectedItem.ToString()
-            Dim driveName As String = selectedItemText.Substring(0, length:=selectedItemText.IndexOf(" "c))
+            Dim selectedItemText As String = HDDBox.Items(HDDBox.SelectedIndex).ToString()
+            Dim driveNameEnd As Integer = selectedItemText.IndexOf(" "c)
+            If driveNameEnd = -1 Then
+                HDDLabel.Text = "Kein gültiges Laufwerk ausgewählt."
+                HddBar1.Value = 0
+                HddBar1.Maximum = 100
+                Return
+            End If
+            Dim driveName As String = selectedItemText.Substring(0, driveNameEnd + 2)
+
             Dim selectedDrive As New DriveInfo(driveName)
 
             If selectedDrive.IsReady Then
@@ -366,12 +381,10 @@ Public Class Form1
                 End If
                 If HddBar1.Value > HddBar1.Maximum Then HddBar1.Value = HddBar1.Maximum
                 If HddBar1.Value < HddBar1.Minimum Then HddBar1.Value = HddBar1.Minimum
-
             Else
                 HDDLabel.Text = $"Laufwerk: {selectedDrive.Name} ({selectedDrive.DriveType}) - Nicht bereit."
                 HddBar1.Value = 0
             End If
-
         Catch ex As Exception
             HDDLabel.Text = $"Fehler beim Abrufen der Laufwerksdetails: {ex.Message}"
             HddBar1.Value = 0
@@ -547,8 +560,6 @@ Public Class Form1
         End If
     End Sub
 
-
-
     Private Sub GetOSAndRootDirectories()
         Try
 
@@ -557,7 +568,7 @@ Public Class Form1
             Dim rootDirectory As String = Path.GetPathRoot(systemDirectory)
 
             My.Settings.OS_RootDir = rootDirectory
-            MessageBox.Show($"OS Verzeichniss: {rootDirectory}")
+            ' MessageBox.Show($"OS Verzeichniss: {rootDirectory}")
         Catch ex As Exception
 
             MessageBox.Show($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}")
@@ -573,12 +584,20 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If Not Console.Visible = True Then
+        If Not Console.Visible Or Not isShellRunning Then
             Console.Visible = True
             TextBox1.Visible = True
+            StartShell()
+            SHButton.Enabled = False
+            Button4.Text = "Shell beenden"
+        ElseIf Console.Visible And isShellRunning Then
+            StopShell()
+            SHButton.Enabled = True
+            Button4.Text = "Shell starten"
         Else
             Console.Visible = False
             TextBox1.Visible = False
+            StopShell()
         End If
     End Sub
 
@@ -657,7 +676,6 @@ Public Class Form1
         End Try
     End Sub
 
-
     Private Function CreateSystemInfoElement(data As SystemInfoData) As XElement
         Return New XElement("SystemInfoEntry",
             New XElement("Timestamp", data.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")),
@@ -718,14 +736,14 @@ Public Class Form1
         Dim exportDialog As New SaveFileDialog With {
             .Filter = "XML-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*",
             .Title = "Systeminformationen exportieren",
-            .FileName = "SystemInfoExport_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".xml"
+            .FileName = "SystemInfoExport_" & Date.Now.ToString("yyyyMMdd_HHmmss") & ".xml"
         }
 
-        If exportDialog.ShowDialog() = DialogResult.OK Then
-            Dim destinationFilePath As String = exportDialog.FileName
-            Dim destinationDirectory As String = Path.GetDirectoryName(destinationFilePath)
-            Dim sourceXslPath As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SystemInfoExport.xsl")
-            Dim destinationXslPath As String = Path.Combine(destinationDirectory, "SystemInfoExport.xsl")
+        If exportDialog.ShowDialog = DialogResult.OK Then
+            Dim destinationFilePath = exportDialog.FileName
+            Dim destinationDirectory = Path.GetDirectoryName(destinationFilePath)
+            Dim sourceXslPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SystemInfoExport.xsl")
+            Dim destinationXslPath = Path.Combine(destinationDirectory, "SystemInfoExport.xsl")
             Try
 
                 If File.Exists(sourceXslPath) Then
@@ -743,27 +761,22 @@ Public Class Form1
         End If
     End Sub
 
-
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        ' Optional: Hier können Sie Code hinzufügen, der beim Anzeigen des Formulars ausgeführt werden soll.
-        ' Zum Beispiel, um die Konsole standardmäßig anzuzeigen.
+
         If HDDBox.Items.Count > 0 Then
-            HDDBox.SelectedIndex = 0 ' Wählen Sie das erste Laufwerk aus, wenn verfügbar
-            UpdateHDDDetails() ' Aktualisieren Sie die Details des ausgewählten Laufwerks
+            HDDBox.SelectedIndex = 0
+            UpdateHDDDetails()
         Else
             HDDLabel.Text = "Keine Laufwerke gefunden."
         End If
     End Sub
 
-
-
     Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox1.KeyPress
-        ' Prüfen, ob die gedrückte Taste die Enter-Taste ist (ASCII-Wert 13)
+
         If e.KeyChar = ChrW(Keys.Enter) Then
-            ' Sendet den Befehl
+
             SendCommand()
 
-            ' Verhindert, dass die Enter-Taste selbst in die Textbox eingefügt wird
             e.Handled = True
         End If
     End Sub
@@ -779,22 +792,32 @@ Public Class Form1
                     Console.AppendText($"> {command}{Environment.NewLine}")
                     Console.SelectionColor = Console.ForeColor
 
-                    ' Befehl an die Standardeingabe der Shell senden
                     cmdProcess.StandardInput.WriteLine(command)
-                    TextBox1.Clear() ' Eingabefeld leeren
+                    TextBox1.Clear()
 
-                    ' Scrollen zum Ende der RichTextBox
-                    Console.ScrollToCaret() ' Sicherstellen, dass 'Console' hier der Name Ihrer RichTextBox ist
+                    Console.ScrollToCaret()
 
                 Catch ex As Exception
-                    ' Beispiel: rtbConsole.AppendText($"Fehler beim Senden des Befehls: {ex.Message}{Environment.NewLine}")
+
                     Console.AppendText($"Fehler beim Senden des Befehls: {ex.Message}{Environment.NewLine}")
                 End Try
             End If
         Else
-            ' Beispiel: rtbConsole.AppendText("Shell ist nicht gestartet oder wurde beendet." & Environment.NewLine)
             Console.AppendText("Shell ist nicht gestartet oder wurde beendet." & Environment.NewLine)
         End If
+    End Sub
+
+    Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        If sender.Equals(PictureBox1) Then
+            If Not FormFAQ.Visible = True Then
+                FormFAQ.Visible = True
+            Else
+                FormFAQ.Visible = False
+            End If
+        End If
+    End Sub
+    Private Sub HDDBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles HDDBox.SelectedIndexChanged
+        UpdateHDDDetails()
     End Sub
 End Class
 

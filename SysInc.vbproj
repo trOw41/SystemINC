@@ -11,7 +11,11 @@
     <ApplicationIcon>011-system-administration.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <UseWPF>False</UseWPF>
-    <ImportedNamespaces>System.Data=False,System.Drawing=true,System.Management=False,System.Windows.Forms=False,System.Windows.Forms.DataVisualization=true,System.Windows.Forms.DataVisualization.Charting=False,System.Windows.Forms.Design=False,System.Windows.Forms.Layout=False,System.Windows.Forms.VisualStyles=False,System.Xml=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,SysInc=True</ImportedNamespaces>
+    <ImportedNamespaces>System.Data=False,System.Drawing=true,System.Management=False,System.Windows.Forms=False,System.Windows.Forms.DataVisualization=true,
+    System.Windows.Forms.DataVisualization.Charting=False,System.Windows.Forms.Design=False,System.Windows.Forms.Layout=False,System.Windows.Forms.VisualStyles=False,System.Xml=False,
+    Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,
+    System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,
+    System.Threading.Tasks=True,SysInc=True</ImportedNamespaces>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <RegisterForComInterop>True</RegisterForComInterop>
@@ -39,20 +43,26 @@
     <Import Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" />
-    <PackageReference Include="ChartDirector.Net" />
+    <PackageReference Include="ChartDirector.Net">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
     <PackageReference Include="HIC.System.Windows.Forms.DataVisualization" />
     <PackageReference Include="Maikebing.System.Windows.Forms.DataVisualization" />
-    <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Microsoft.Windows.Compatibility" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
     <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" />
     <PackageReference Include="System.Data.SqlClient" />
     <PackageReference Include="System.Data.SQLite.EF6" />
-    <PackageReference Include="System.Drawing.Common" />
-    <PackageReference Include="System.Drawing.Primitives" />
+    <PackageReference Include="System.Drawing.Common">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Primitives">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
     <PackageReference Include="System.Management" />
   </ItemGroup>
   <ItemGroup>

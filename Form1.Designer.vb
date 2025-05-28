@@ -37,21 +37,23 @@ Partial Class Form1
         ToolStripSeparator2 = New ToolStripSeparator()
         HilfeToolStripMenuItem1 = New ToolStripMenuItem()
         Panel1 = New Panel()
+        PictureBox1 = New PictureBox()
+        Label2 = New Label()
         TextBox1 = New TextBox()
         Label5 = New Label()
-        Label4 = New Label()
         Button4 = New Button()
-        Button5 = New Button()
         Console = New RichTextBox()
         Button3 = New Button()
         Button2 = New Button()
         Panel2 = New Panel()
-        HddBar1 = New ProgressBar()
-        HDDLabel = New Label()
-        Button1 = New Button()
+        HDDLabel = New LinkLabel()
         HDDBox = New ListBox()
+        HddBar1 = New ProgressBar()
+        SHButton = New Button()
         SystemView = New ListView()
         ImageList1 = New ImageList(components)
+        Label4 = New Label()
+        Button5 = New Button()
         Label1 = New Label()
         HelpProvider1 = New HelpProvider()
         Panel3 = New Panel()
@@ -59,7 +61,9 @@ Partial Class Form1
         BindingSource1 = New BindingSource(components)
         MenuStrip1.SuspendLayout()
         Panel1.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
+        Panel3.SuspendLayout()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).BeginInit()
         CType(BindingSource1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -67,7 +71,9 @@ Partial Class Form1
         ' MenuStrip1
         ' 
         resources.ApplyResources(MenuStrip1, "MenuStrip1")
+        MenuStrip1.AllowClickThrough = True
         MenuStrip1.BackColor = SystemColors.ActiveCaption
+        MenuStrip1.BackgroundImage = My.Resources.Resources._011_system_administration
         ErrorProvider1.SetError(MenuStrip1, resources.GetString("MenuStrip1.Error"))
         MenuStrip1.GripMargin = New Padding(10)
         HelpProvider1.SetHelpKeyword(MenuStrip1, resources.GetString("MenuStrip1.HelpKeyword"))
@@ -75,11 +81,13 @@ Partial Class Form1
         HelpProvider1.SetHelpString(MenuStrip1, resources.GetString("MenuStrip1.HelpString"))
         ErrorProvider1.SetIconAlignment(MenuStrip1, resources.GetObject("MenuStrip1.IconAlignment"))
         ErrorProvider1.SetIconPadding(MenuStrip1, resources.GetObject("MenuStrip1.IconPadding"))
-        MenuStrip1.ImageScalingSize = New Size(20, 20)
+        MenuStrip1.ImageScalingSize = New Size(24, 24)
         MenuStrip1.Items.AddRange(New ToolStripItem() {MenüToolStripMenuItem, SystemToolStripMenuItem, InfoToolStripMenuItem})
         MenuStrip1.Name = "MenuStrip1"
+        MenuStrip1.RenderMode = ToolStripRenderMode.System
         HelpProvider1.SetShowHelp(MenuStrip1, resources.GetObject("MenuStrip1.ShowHelp"))
         MenuStrip1.ShowItemToolTips = True
+        MenuStrip1.Stretch = False
         ' 
         ' MenüToolStripMenuItem
         ' 
@@ -170,17 +178,16 @@ Partial Class Form1
         resources.ApplyResources(Panel1, "Panel1")
         Panel1.BackColor = SystemColors.ControlDarkDark
         Panel1.BorderStyle = BorderStyle.FixedSingle
+        Panel1.Controls.Add(PictureBox1)
+        Panel1.Controls.Add(Label2)
         Panel1.Controls.Add(TextBox1)
         Panel1.Controls.Add(Label5)
-        Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(Button4)
-        Panel1.Controls.Add(Button5)
         Panel1.Controls.Add(Console)
         Panel1.Controls.Add(Button3)
         Panel1.Controls.Add(Button2)
         Panel1.Controls.Add(Panel2)
-        Panel1.Controls.Add(Button1)
-        Panel1.Controls.Add(HDDBox)
+        Panel1.Controls.Add(SHButton)
         Panel1.Controls.Add(SystemView)
         ErrorProvider1.SetError(Panel1, resources.GetString("Panel1.Error"))
         HelpProvider1.SetHelpKeyword(Panel1, resources.GetString("Panel1.HelpKeyword"))
@@ -190,6 +197,36 @@ Partial Class Form1
         ErrorProvider1.SetIconPadding(Panel1, resources.GetObject("Panel1.IconPadding"))
         Panel1.Name = "Panel1"
         HelpProvider1.SetShowHelp(Panel1, resources.GetObject("Panel1.ShowHelp"))
+        ' 
+        ' PictureBox1
+        ' 
+        resources.ApplyResources(PictureBox1, "PictureBox1")
+        ErrorProvider1.SetError(PictureBox1, resources.GetString("PictureBox1.Error"))
+        HelpProvider1.SetHelpKeyword(PictureBox1, resources.GetString("PictureBox1.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(PictureBox1, resources.GetObject("PictureBox1.HelpNavigator"))
+        HelpProvider1.SetHelpString(PictureBox1, resources.GetString("PictureBox1.HelpString"))
+        ErrorProvider1.SetIconAlignment(PictureBox1, resources.GetObject("PictureBox1.IconAlignment"))
+        ErrorProvider1.SetIconPadding(PictureBox1, resources.GetObject("PictureBox1.IconPadding"))
+        PictureBox1.Image = My.Resources.Resources._028_faq
+        PictureBox1.Name = "PictureBox1"
+        HelpProvider1.SetShowHelp(PictureBox1, resources.GetObject("PictureBox1.ShowHelp"))
+        PictureBox1.TabStop = False
+        ' 
+        ' Label2
+        ' 
+        resources.ApplyResources(Label2, "Label2")
+        Label2.AutoEllipsis = True
+        ErrorProvider1.SetError(Label2, resources.GetString("Label2.Error"))
+        Label2.FlatStyle = FlatStyle.Flat
+        Label2.ForeColor = SystemColors.ControlLight
+        HelpProvider1.SetHelpKeyword(Label2, resources.GetString("Label2.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Label2, resources.GetObject("Label2.HelpNavigator"))
+        HelpProvider1.SetHelpString(Label2, resources.GetString("Label2.HelpString"))
+        ErrorProvider1.SetIconAlignment(Label2, resources.GetObject("Label2.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Label2, resources.GetObject("Label2.IconPadding"))
+        Label2.Name = "Label2"
+        HelpProvider1.SetShowHelp(Label2, resources.GetObject("Label2.ShowHelp"))
+        Label2.UseCompatibleTextRendering = True
         ' 
         ' TextBox1
         ' 
@@ -207,7 +244,8 @@ Partial Class Form1
         ' 
         resources.ApplyResources(Label5, "Label5")
         ErrorProvider1.SetError(Label5, resources.GetString("Label5.Error"))
-        Label5.ForeColor = Color.DarkOrange
+        Label5.FlatStyle = FlatStyle.System
+        Label5.ForeColor = Color.Gainsboro
         HelpProvider1.SetHelpKeyword(Label5, resources.GetString("Label5.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Label5, resources.GetObject("Label5.HelpNavigator"))
         HelpProvider1.SetHelpString(Label5, resources.GetString("Label5.HelpString"))
@@ -216,24 +254,11 @@ Partial Class Form1
         Label5.Name = "Label5"
         HelpProvider1.SetShowHelp(Label5, resources.GetObject("Label5.ShowHelp"))
         ' 
-        ' Label4
-        ' 
-        resources.ApplyResources(Label4, "Label4")
-        ErrorProvider1.SetError(Label4, resources.GetString("Label4.Error"))
-        Label4.ForeColor = Color.DarkOrange
-        HelpProvider1.SetHelpKeyword(Label4, resources.GetString("Label4.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(Label4, resources.GetObject("Label4.HelpNavigator"))
-        HelpProvider1.SetHelpString(Label4, resources.GetString("Label4.HelpString"))
-        ErrorProvider1.SetIconAlignment(Label4, resources.GetObject("Label4.IconAlignment"))
-        ErrorProvider1.SetIconPadding(Label4, resources.GetObject("Label4.IconPadding"))
-        Label4.Name = "Label4"
-        HelpProvider1.SetShowHelp(Label4, resources.GetObject("Label4.ShowHelp"))
-        ' 
         ' Button4
         ' 
         resources.ApplyResources(Button4, "Button4")
         ErrorProvider1.SetError(Button4, resources.GetString("Button4.Error"))
-        Button4.ForeColor = Color.Gold
+        Button4.ForeColor = SystemColors.GradientInactiveCaption
         HelpProvider1.SetHelpKeyword(Button4, resources.GetString("Button4.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Button4, resources.GetObject("Button4.HelpNavigator"))
         HelpProvider1.SetHelpString(Button4, resources.GetString("Button4.HelpString"))
@@ -242,20 +267,6 @@ Partial Class Form1
         Button4.Name = "Button4"
         HelpProvider1.SetShowHelp(Button4, resources.GetObject("Button4.ShowHelp"))
         Button4.UseVisualStyleBackColor = True
-        ' 
-        ' Button5
-        ' 
-        resources.ApplyResources(Button5, "Button5")
-        ErrorProvider1.SetError(Button5, resources.GetString("Button5.Error"))
-        Button5.ForeColor = Color.Gold
-        HelpProvider1.SetHelpKeyword(Button5, resources.GetString("Button5.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(Button5, resources.GetObject("Button5.HelpNavigator"))
-        HelpProvider1.SetHelpString(Button5, resources.GetString("Button5.HelpString"))
-        ErrorProvider1.SetIconAlignment(Button5, resources.GetObject("Button5.IconAlignment"))
-        ErrorProvider1.SetIconPadding(Button5, resources.GetObject("Button5.IconPadding"))
-        Button5.Name = "Button5"
-        HelpProvider1.SetShowHelp(Button5, resources.GetObject("Button5.ShowHelp"))
-        Button5.UseVisualStyleBackColor = True
         ' 
         ' Console
         ' 
@@ -277,7 +288,7 @@ Partial Class Form1
         ' 
         resources.ApplyResources(Button3, "Button3")
         ErrorProvider1.SetError(Button3, resources.GetString("Button3.Error"))
-        Button3.ForeColor = Color.Gold
+        Button3.ForeColor = SystemColors.GradientInactiveCaption
         HelpProvider1.SetHelpKeyword(Button3, resources.GetString("Button3.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Button3, resources.GetObject("Button3.HelpNavigator"))
         HelpProvider1.SetHelpString(Button3, resources.GetString("Button3.HelpString"))
@@ -291,7 +302,7 @@ Partial Class Form1
         ' 
         resources.ApplyResources(Button2, "Button2")
         ErrorProvider1.SetError(Button2, resources.GetString("Button2.Error"))
-        Button2.ForeColor = Color.Gold
+        Button2.ForeColor = SystemColors.GradientInactiveCaption
         HelpProvider1.SetHelpKeyword(Button2, resources.GetString("Button2.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Button2, resources.GetObject("Button2.HelpNavigator"))
         HelpProvider1.SetHelpString(Button2, resources.GetString("Button2.HelpString"))
@@ -305,8 +316,10 @@ Partial Class Form1
         ' 
         resources.ApplyResources(Panel2, "Panel2")
         Panel2.BackColor = SystemColors.ControlLight
-        Panel2.Controls.Add(HddBar1)
+        Panel2.BorderStyle = BorderStyle.Fixed3D
         Panel2.Controls.Add(HDDLabel)
+        Panel2.Controls.Add(HDDBox)
+        Panel2.Controls.Add(HddBar1)
         ErrorProvider1.SetError(Panel2, resources.GetString("Panel2.Error"))
         Panel2.ForeColor = SystemColors.ActiveCaptionText
         HelpProvider1.SetHelpKeyword(Panel2, resources.GetString("Panel2.HelpKeyword"))
@@ -317,9 +330,42 @@ Partial Class Form1
         Panel2.Name = "Panel2"
         HelpProvider1.SetShowHelp(Panel2, resources.GetObject("Panel2.ShowHelp"))
         ' 
+        ' HDDLabel
+        ' 
+        resources.ApplyResources(HDDLabel, "HDDLabel")
+        ErrorProvider1.SetError(HDDLabel, resources.GetString("HDDLabel.Error"))
+        HDDLabel.ForeColor = SystemColors.ActiveCaptionText
+        HelpProvider1.SetHelpKeyword(HDDLabel, resources.GetString("HDDLabel.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(HDDLabel, resources.GetObject("HDDLabel.HelpNavigator"))
+        HelpProvider1.SetHelpString(HDDLabel, resources.GetString("HDDLabel.HelpString"))
+        ErrorProvider1.SetIconAlignment(HDDLabel, resources.GetObject("HDDLabel.IconAlignment"))
+        ErrorProvider1.SetIconPadding(HDDLabel, resources.GetObject("HDDLabel.IconPadding"))
+        HDDLabel.LinkBehavior = LinkBehavior.HoverUnderline
+        HDDLabel.LinkColor = SystemColors.ActiveCaptionText
+        HDDLabel.Name = "HDDLabel"
+        HelpProvider1.SetShowHelp(HDDLabel, resources.GetObject("HDDLabel.ShowHelp"))
+        HDDLabel.TabStop = True
+        HDDLabel.VisitedLinkColor = Color.Silver
+        ' 
+        ' HDDBox
+        ' 
+        resources.ApplyResources(HDDBox, "HDDBox")
+        HDDBox.BackColor = SystemColors.ControlDark
+        ErrorProvider1.SetError(HDDBox, resources.GetString("HDDBox.Error"))
+        HDDBox.ForeColor = SystemColors.ActiveCaptionText
+        HDDBox.FormattingEnabled = True
+        HelpProvider1.SetHelpKeyword(HDDBox, resources.GetString("HDDBox.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(HDDBox, resources.GetObject("HDDBox.HelpNavigator"))
+        HelpProvider1.SetHelpString(HDDBox, resources.GetString("HDDBox.HelpString"))
+        ErrorProvider1.SetIconAlignment(HDDBox, resources.GetObject("HDDBox.IconAlignment"))
+        ErrorProvider1.SetIconPadding(HDDBox, resources.GetObject("HDDBox.IconPadding"))
+        HDDBox.Name = "HDDBox"
+        HelpProvider1.SetShowHelp(HDDBox, resources.GetObject("HDDBox.ShowHelp"))
+        ' 
         ' HddBar1
         ' 
         resources.ApplyResources(HddBar1, "HddBar1")
+        HddBar1.BackColor = SystemColors.ControlLightLight
         ErrorProvider1.SetError(HddBar1, resources.GetString("HddBar1.Error"))
         HddBar1.ForeColor = Color.GreenYellow
         HelpProvider1.SetHelpKeyword(HddBar1, resources.GetString("HddBar1.HelpKeyword"))
@@ -330,52 +376,21 @@ Partial Class Form1
         HddBar1.Name = "HddBar1"
         HelpProvider1.SetShowHelp(HddBar1, resources.GetObject("HddBar1.ShowHelp"))
         HddBar1.Step = 1
-        HddBar1.Value = 15
+        HddBar1.Value = 50
         ' 
-        ' HDDLabel
+        ' SHButton
         ' 
-        resources.ApplyResources(HDDLabel, "HDDLabel")
-        HDDLabel.BackColor = Color.Transparent
-        ErrorProvider1.SetError(HDDLabel, resources.GetString("HDDLabel.Error"))
-        HDDLabel.FlatStyle = FlatStyle.Flat
-        HDDLabel.ForeColor = SystemColors.ActiveCaptionText
-        HelpProvider1.SetHelpKeyword(HDDLabel, resources.GetString("HDDLabel.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(HDDLabel, resources.GetObject("HDDLabel.HelpNavigator"))
-        HelpProvider1.SetHelpString(HDDLabel, resources.GetString("HDDLabel.HelpString"))
-        ErrorProvider1.SetIconAlignment(HDDLabel, resources.GetObject("HDDLabel.IconAlignment"))
-        ErrorProvider1.SetIconPadding(HDDLabel, resources.GetObject("HDDLabel.IconPadding"))
-        HDDLabel.Name = "HDDLabel"
-        HelpProvider1.SetShowHelp(HDDLabel, resources.GetObject("HDDLabel.ShowHelp"))
-        ' 
-        ' Button1
-        ' 
-        resources.ApplyResources(Button1, "Button1")
-        ErrorProvider1.SetError(Button1, resources.GetString("Button1.Error"))
-        Button1.ForeColor = Color.Gold
-        HelpProvider1.SetHelpKeyword(Button1, resources.GetString("Button1.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(Button1, resources.GetObject("Button1.HelpNavigator"))
-        HelpProvider1.SetHelpString(Button1, resources.GetString("Button1.HelpString"))
-        ErrorProvider1.SetIconAlignment(Button1, resources.GetObject("Button1.IconAlignment"))
-        ErrorProvider1.SetIconPadding(Button1, resources.GetObject("Button1.IconPadding"))
-        Button1.Name = "Button1"
-        HelpProvider1.SetShowHelp(Button1, resources.GetObject("Button1.ShowHelp"))
-        Button1.UseVisualStyleBackColor = True
-        ' 
-        ' HDDBox
-        ' 
-        resources.ApplyResources(HDDBox, "HDDBox")
-        HDDBox.BackColor = SystemColors.ControlLight
-        HDDBox.BorderStyle = BorderStyle.FixedSingle
-        ErrorProvider1.SetError(HDDBox, resources.GetString("HDDBox.Error"))
-        HDDBox.ForeColor = SystemColors.MenuText
-        HDDBox.FormattingEnabled = True
-        HelpProvider1.SetHelpKeyword(HDDBox, resources.GetString("HDDBox.HelpKeyword"))
-        HelpProvider1.SetHelpNavigator(HDDBox, resources.GetObject("HDDBox.HelpNavigator"))
-        HelpProvider1.SetHelpString(HDDBox, resources.GetString("HDDBox.HelpString"))
-        ErrorProvider1.SetIconAlignment(HDDBox, resources.GetObject("HDDBox.IconAlignment"))
-        ErrorProvider1.SetIconPadding(HDDBox, resources.GetObject("HDDBox.IconPadding"))
-        HDDBox.Name = "HDDBox"
-        HelpProvider1.SetShowHelp(HDDBox, resources.GetObject("HDDBox.ShowHelp"))
+        resources.ApplyResources(SHButton, "SHButton")
+        ErrorProvider1.SetError(SHButton, resources.GetString("SHButton.Error"))
+        SHButton.ForeColor = SystemColors.GradientInactiveCaption
+        HelpProvider1.SetHelpKeyword(SHButton, resources.GetString("SHButton.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(SHButton, resources.GetObject("SHButton.HelpNavigator"))
+        HelpProvider1.SetHelpString(SHButton, resources.GetString("SHButton.HelpString"))
+        ErrorProvider1.SetIconAlignment(SHButton, resources.GetObject("SHButton.IconAlignment"))
+        ErrorProvider1.SetIconPadding(SHButton, resources.GetObject("SHButton.IconPadding"))
+        SHButton.Name = "SHButton"
+        HelpProvider1.SetShowHelp(SHButton, resources.GetObject("SHButton.ShowHelp"))
+        SHButton.UseVisualStyleBackColor = True
         ' 
         ' SystemView
         ' 
@@ -420,6 +435,36 @@ Partial Class Form1
         ImageList1.Images.SetKeyName(15, "022-processor.png")
         ImageList1.Images.SetKeyName(16, "026-graphics-card.png")
         ' 
+        ' Label4
+        ' 
+        resources.ApplyResources(Label4, "Label4")
+        Label4.BackColor = Color.Transparent
+        Label4.BorderStyle = BorderStyle.Fixed3D
+        ErrorProvider1.SetError(Label4, resources.GetString("Label4.Error"))
+        Label4.FlatStyle = FlatStyle.Flat
+        Label4.ForeColor = SystemColors.MenuHighlight
+        HelpProvider1.SetHelpKeyword(Label4, resources.GetString("Label4.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Label4, resources.GetObject("Label4.HelpNavigator"))
+        HelpProvider1.SetHelpString(Label4, resources.GetString("Label4.HelpString"))
+        ErrorProvider1.SetIconAlignment(Label4, resources.GetObject("Label4.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Label4, resources.GetObject("Label4.IconPadding"))
+        Label4.Name = "Label4"
+        HelpProvider1.SetShowHelp(Label4, resources.GetObject("Label4.ShowHelp"))
+        ' 
+        ' Button5
+        ' 
+        resources.ApplyResources(Button5, "Button5")
+        ErrorProvider1.SetError(Button5, resources.GetString("Button5.Error"))
+        Button5.ForeColor = SystemColors.InactiveCaptionText
+        HelpProvider1.SetHelpKeyword(Button5, resources.GetString("Button5.HelpKeyword"))
+        HelpProvider1.SetHelpNavigator(Button5, resources.GetObject("Button5.HelpNavigator"))
+        HelpProvider1.SetHelpString(Button5, resources.GetString("Button5.HelpString"))
+        ErrorProvider1.SetIconAlignment(Button5, resources.GetObject("Button5.IconAlignment"))
+        ErrorProvider1.SetIconPadding(Button5, resources.GetObject("Button5.IconPadding"))
+        Button5.Name = "Button5"
+        HelpProvider1.SetShowHelp(Button5, resources.GetObject("Button5.ShowHelp"))
+        Button5.UseVisualStyleBackColor = True
+        ' 
         ' Label1
         ' 
         resources.ApplyResources(Label1, "Label1")
@@ -445,6 +490,8 @@ Partial Class Form1
         resources.ApplyResources(Panel3, "Panel3")
         Panel3.BackColor = SystemColors.ControlLight
         Panel3.BorderStyle = BorderStyle.FixedSingle
+        Panel3.Controls.Add(Button5)
+        Panel3.Controls.Add(Label4)
         ErrorProvider1.SetError(Panel3, resources.GetString("Panel3.Error"))
         HelpProvider1.SetHelpKeyword(Panel3, resources.GetString("Panel3.HelpKeyword"))
         HelpProvider1.SetHelpNavigator(Panel3, resources.GetObject("Panel3.HelpNavigator"))
@@ -482,8 +529,11 @@ Partial Class Form1
         MenuStrip1.PerformLayout()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
         CType(ErrorProvider1, ComponentModel.ISupportInitialize).EndInit()
         CType(BindingSource1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -498,12 +548,10 @@ Partial Class Form1
     Friend WithEvents Panel1 As Panel
     Friend WithEvents SystemView As ListView
     Friend WithEvents BeendenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents HDDLabel As Label
     Friend WithEvents HddBar1 As ProgressBar
-    Friend WithEvents HDDBox As ListBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Console As RichTextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents SHButton As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents HelpProvider1 As HelpProvider
     Friend WithEvents ErrorProvider1 As ErrorProvider
@@ -530,4 +578,8 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ExportAsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents HDDBox As ListBox
+    Friend WithEvents HDDLabel As LinkLabel
 End Class
