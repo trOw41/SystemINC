@@ -574,61 +574,6 @@ Public Class Form1
             MessageBox.Show($"Fehler beim Abrufen der Verzeichnisse: {ex.Message}")
         End Try
     End Sub
-
-    Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        FormFAQ.Show()
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If Not Console.Visible Or Not isShellRunning Then
-            Console.Visible = True
-            TextBox1.Visible = True
-            StartShell()
-            SHButton.Enabled = False
-            Button4.Text = "Shell beenden"
-        ElseIf Console.Visible And isShellRunning Then
-            StopShell()
-            SHButton.Enabled = True
-            Button4.Text = "Shell starten"
-        Else
-            Console.Visible = False
-            TextBox1.Visible = False
-            StopShell()
-        End If
-    End Sub
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim res As Boolean = IsUserAdministrator()
-
-        Dim programPath As String = My.Settings.OS_RootDir & "Windows\System32\diskmgmt.msc"
-        If res = True Then
-
-            If Not Console.Visible = True Then
-                Console.Visible = True
-            End If
-            Try
-                Process.Start(programPath)
-            Catch ex As Exception
-                Dim errInt As String = ex.StackTrace
-
-                If errorList Is Nothing Or errorList IsNot Nothing Then
-                    errorList.Add(errInt & "," & Date.Now)
-                    Label1.Text = $"Fehler beim Starten des Programms:" & ex.StackTrace & $" |Err.Code: {errInt}"
-                Else
-                    MessageBox.Show(errInt)
-                End If
-
-            End Try
-        ElseIf res = False Then
-            EnsureAdminRightsAndCreateDirectory(programPath)
-            MessageBox.Show("No Admin rights granted please do and restart Disk-Mangement Tool")
-
-        End If
-    End Sub
     Private Sub ExportSystemInfoAsXML(filePath As String)
         Try
             Dim currentInfo As New SystemInfoData(
