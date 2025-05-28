@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
-    <StartupObject>Sub Main</StartupObject>
+    <StartupObject>SysInc.My.MyApplication</StartupObject>
     <UseWindowsForms>True</UseWindowsForms>
     <MyType>WindowsForms</MyType>
     <NuGetAuditMode>all</NuGetAuditMode>
@@ -16,17 +16,40 @@
     Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,
     System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,
     System.Threading.Tasks=True,SysInc=True</ImportedNamespaces>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <NuGetAudit>True</NuGetAudit>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <RegisterForComInterop>True</RegisterForComInterop>
-    <RemoveIntegerChecks>False</RemoveIntegerChecks>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Optimize>True</Optimize>
+    <NoWarn>42017,42018,42019,42032,42036</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <RegisterForComInterop>True</RegisterForComInterop>
-    <RemoveIntegerChecks>False</RemoveIntegerChecks>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Optimize>True</Optimize>
+    <NoWarn>42017,42018,42019,42032,42036</NoWarn>
   </PropertyGroup>
+  <ItemGroup>
+    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
+    </COMReference>
+    <COMReference Include="{bee4bfec-6683-3e67-9167-3c0cbc68f40a}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>bee4bfec-6683-3e67-9167-3c0cbc68f40a</Guid>
+    </COMReference>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="011-system-administration.ico" />
   </ItemGroup>
@@ -47,6 +70,8 @@
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="HIC.System.Windows.Forms.DataVisualization" />
+    <PackageReference Include="LiveCharts" />
+    <PackageReference Include="LiveCharts.WinForms" />
     <PackageReference Include="Maikebing.System.Windows.Forms.DataVisualization" />
     <PackageReference Include="Microsoft.Windows.Compatibility" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
@@ -58,9 +83,6 @@
     <PackageReference Include="System.Data.SqlClient" />
     <PackageReference Include="System.Data.SQLite.EF6" />
     <PackageReference Include="System.Drawing.Common">
-      <TreatAsUsed>true</TreatAsUsed>
-    </PackageReference>
-    <PackageReference Include="System.Drawing.Primitives">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="System.Management" />

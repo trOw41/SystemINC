@@ -2,8 +2,9 @@
   "profiles": {
     "SysInc": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\TrOw-\\Documents\\Programmierung\\VB und C++ Projekte\\SysInc",
-      "nativeDebugging": true
+      "nativeDebugging": false,
+      "hotReloadEnabled": false,
+      "sqlDebugging": false
     }
   }
 }

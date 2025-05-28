@@ -1,11 +1,12 @@
 ﻿Imports System.IO
+
 Public NotInheritable Class About
 
 
 
     Private Sub AboutBox1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim Version As String = "1.0.0.1"
+        Dim Version As String = Form1.VersionNumber
         Dim ApplicationTitle As String
         If My.Application.Info.Title <> "" Then
             ApplicationTitle = My.Application.Info.Title
@@ -14,7 +15,7 @@ Public NotInheritable Class About
         End If
         Me.Text = $"Info {ApplicationTitle }"
         Me.LabelProductName.Text = My.Application.Info.ProductName
-        Me.LabelVersion.Text = String.Format("Version {0}", Version)
+        Me.LabelVersion.Text = $"Version {Version }"
         Me.LabelCopyright.Text = My.Application.Info.Copyright
         Me.LabelCompanyName.Text = My.Application.Info.CompanyName
         Dim licensePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LICENSE.txt")

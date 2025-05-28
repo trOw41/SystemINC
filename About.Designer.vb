@@ -61,12 +61,12 @@ Partial Class About
         TableLayoutPanel.Margin = New Padding(4, 3, 4, 3)
         TableLayoutPanel.Name = "TableLayoutPanel"
         TableLayoutPanel.RowCount = 6
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0F))
-        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10.0F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
+        TableLayoutPanel.RowStyles.Add(New RowStyle(SizeType.Percent, 10F))
         TableLayoutPanel.Size = New Size(463, 298)
         TableLayoutPanel.TabIndex = 0
         ' 
@@ -158,7 +158,7 @@ Partial Class About
         ' 
         ' About
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = OKButton
         ClientSize = New Size(483, 318)

@@ -13,17 +13,16 @@ Public Class Dialog1
     End Sub
 
 
-    Private Sub Dialog1_load(sender As Object, e As EventArgs)
-        If Me.Controls.ContainsKey("TextBox") AndAlso TypeOf Me.Controls("TextBox") Is TextBox Then
-            Dim targetTextBox As TextBox = DirectCast(Me.Controls("TextBox"), TextBox)
-            If Not String.IsNullOrEmpty(_displayText) Then
-                targetTextBox.Text = _displayText
+    Private Sub Dialog1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If TextBox1 IsNot Nothing Then
+            If File.Exists(_displayText) Then
+                TextBox1.Text = File.ReadAllText(_displayText)
             Else
-                targetTextBox.Text = "Es wurde kein Text zur Anzeige übergeben."
+                TextBox1.Text = "Es wurde kein Text zur Anzeige übergeben."
+                Debug.WriteLine("Warnung: TextBox-Steuerelement in Dialog1 nicht gefunden.")
             End If
         Else
-
-            Debug.WriteLine("Warnung: TextBox-Steuerelement in Dialog1 nicht gefunden.")
+            Debug.WriteLine("Fehler: TextBox1 ist nicht vorhanden oder nicht initialisiert.")
         End If
     End Sub
 End Class

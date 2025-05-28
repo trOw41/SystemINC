@@ -2,8 +2,6 @@
 Imports System.Net
 Imports System.Text
 Imports System.Windows.Forms.ListView
-Imports Windows.Media.Protection.PlayReady
-
 
 Public Class Form1
 
@@ -30,15 +28,14 @@ Public Class Form1
     Private Const ICON_PROCESSOR_INFO As Integer = 15
     Private Const ICON_GRAPHICS_CARD As Integer = 16
     Private _systemInfoRepository As SystemInfoRepository
-    Public Version As String = Application.ProductVersion.ToString()
-    Public Const VersionNumber As String = "1.0.0" ' Beispiel für eine Versionsnummer, kann angepasst werden
+    Public Const VersionNumber As String = "1.0.0"
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles SHButton.Click
         If Not isShellRunning Then
-            StartShell()
+            StartShell
             SHButton.Text = "Shell beenden"
         Else
-            StopShell()
+            StopShell
             SHButton.Text = "Shell starten"
         End If
 
@@ -193,6 +190,7 @@ Public Class Form1
                       RemoveHandler cmdProcess.Exited, AddressOf ProcessExited
                       cmdProcess.Dispose()
                       cmdProcess = Nothing
+                      Me.Focus()
                   End Sub)
     End Sub
 
@@ -203,6 +201,7 @@ Public Class Form1
             SendCommand()
         End If
     End Sub
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         _systemInfoRepository = New SystemInfoRepository()
         Dim currentInfo As New SystemInfoData(
@@ -240,7 +239,7 @@ Public Class Form1
         Label2.EndInvoke(Label2.BeginInvoke(New Action(Sub()
                                                            Label2.Text = Application.ProductName & vbCrLf & $"v.{VersionNumber}"
                                                        End Sub)))
-
+        Me.Text = Application.ProductName & " - v." & VersionNumber
         DisplaySystemInformation()
         PopulateHDDBox()
         IsUserAdministrator()
@@ -763,6 +762,123 @@ Public Class Form1
     End Sub
     Private Sub HDDBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles HDDBox.SelectedIndexChanged
         UpdateHDDDetails()
+    End Sub
+
+    Private Sub HDDLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles HDDLabel.LinkClicked
+        Try
+            Dim driveName As String = HDDBox.SelectedItem.ToString().Split(" "c)(0).TrimEnd("\"c)
+            Process.Start("explorer.exe", driveName)
+        Catch ex As Exception
+            MessageBox.Show($"Fehler beim Öffnen des Laufwerks: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub HilfeToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        FormFAQ.Show()
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If Console.Visible = True OrElse isShellRunning = True Then
+            Console.Visible = False
+            TextBox1.Visible = False
+            StopShell()
+            SHButton.Enabled = True
+            Button4.Text = "Shell beenden"
+        Else
+            StartShell()
+            SHButton.Enabled = False
+            Button4.Text = "SH(shell)"
+            Console.Visible = True
+            TextBox1.Visible = True
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim res = IsUserAdministrator()
+
+        Dim programPath = My.Settings.OS_RootDir & "Windows\System32\"
+        If res = True Then
+            If Console.Visible = True Then
+                Console.Visible = False
+            End If
+            StartMSCManagement("diskmgmt.msc")
+        ElseIf res = False Then
+            EnsureAdminRightsAndCreateDirectory(programPath)
+            MessageBox.Show("No Admin rights granted please do and restart Disk-Mangement Tool")
+        End If
+    End Sub
+
+    Private Sub StartMSCManagement(conHost As String)
+        Dim isAdmin As Boolean = IsUserAdministrator()
+        Dim diskmgmtPath As String = conHost
+        Try
+            If isAdmin Then
+                Process.Start("mmc.exe", diskmgmtPath)
+            Else
+                Dim psi As New ProcessStartInfo With {
+                        .FileName = "mmc.exe",
+                        .Arguments = diskmgmtPath,
+                        .Verb = "runas"
+                    }
+                Process.Start(psi)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Fehler beim Starten der Datenträgerverwaltung: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub StartTaskManager()
+        Dim isAdmin As Boolean = IsUserAdministrator()
+        Try
+            If isAdmin Then
+                Process.Start("taskmgr.exe")
+            Else
+                Dim psi As New ProcessStartInfo With {
+                        .FileName = "taskmgr.exe",
+                        .Verb = "runas"
+                    }
+                Process.Start(psi)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Fehler beim Starten des Task-Managers: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+    End Sub
+
+    Private Sub InfoMenu_Click(sender As Object, e As EventArgs) Handles InfoMenu.Click
+        About.Show()
+    End Sub
+
+    Private Sub Tskmgr_Click(sender As Object, e As EventArgs) Handles tskmgr.Click
+        StartTaskManager()
+    End Sub
+
+    Private Sub ServiceButton_Click(sender As Object, e As EventArgs) Handles ServiceButton.Click
+        StartServiceConsole("services.msc")
+    End Sub
+    Private Sub StartServiceConsole(conHost As String)
+        Dim isAdmin As Boolean = IsUserAdministrator()
+        Dim diskmgmtPath As String = conHost
+        Try
+            If isAdmin Then
+                Process.Start("mmc.exe", diskmgmtPath)
+            Else
+                Dim psi As New ProcessStartInfo With {
+                        .FileName = "mmc.exe",
+                        .Arguments = diskmgmtPath,
+                        .Verb = "runas"
+                    }
+                Process.Start(psi)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Fehler beim Starten der Datenträgerverwaltung: {ex.Message}", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        DiskAnalyzer.Show()
     End Sub
 End Class
 

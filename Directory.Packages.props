@@ -10,6 +10,8 @@
     <PackageVersion Include="Grapecity.DataVisualization" Version="0.1.248" />
     <PackageVersion Include="GrapeCity.DataVisualization.Chart" Version="0.4.136" />
     <PackageVersion Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
+    <PackageVersion Include="LiveCharts" Version="0.9.7" />
+    <PackageVersion Include="LiveCharts.WinForms" Version="0.9.7.1" />
     <PackageVersion Include="Maikebing.System.Windows.Forms.DataVisualization" Version="5.0.1" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.0-preview1.25120.4" />
     <PackageVersion Include="Microsoft.Windows.Compatibility" Version="9.0.5" />

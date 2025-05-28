@@ -2,7 +2,6 @@
 Partial Class Dialog1
     Inherits System.Windows.Forms.Form
 
-    'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -14,18 +13,15 @@ Partial Class Dialog1
         End Try
     End Sub
 
-    'Wird vom Windows Form-Designer benötigt.
     Private components As System.ComponentModel.IContainer
 
-    'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
-    'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
-    'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
+
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         TableLayoutPanel1 = New TableLayoutPanel()
         OK_Button = New Button()
         Cancel_Button = New Button()
-        TextBox = New RichTextBox()
+        TextBox1 = New RichTextBox()
         TableLayoutPanel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -65,17 +61,14 @@ Partial Class Dialog1
         Cancel_Button.TabIndex = 1
         Cancel_Button.Text = "Abbrechen"
         ' 
-        ' TextBox
+        ' TextBox1
         ' 
-        TextBox.BackColor = Color.AliceBlue
-        TextBox.BorderStyle = BorderStyle.FixedSingle
-        TextBox.Dock = DockStyle.Top
-        TextBox.Location = New Point(0, 0)
-        TextBox.Name = "TextBox"
-        TextBox.ReadOnly = True
-        TextBox.Size = New Size(507, 294)
-        TextBox.TabIndex = 1
-        TextBox.Text = ""
+        TextBox1.Location = New Point(12, 12)
+        TextBox1.Name = "TextBox1"
+        TextBox1.ReadOnly = True
+        TextBox1.Size = New Size(477, 298)
+        TextBox1.TabIndex = 1
+        TextBox1.Text = ""
         ' 
         ' Dialog1
         ' 
@@ -84,7 +77,7 @@ Partial Class Dialog1
         AutoScaleMode = AutoScaleMode.Font
         CancelButton = Cancel_Button
         ClientSize = New Size(507, 363)
-        Controls.Add(TextBox)
+        Controls.Add(TextBox1)
         Controls.Add(TableLayoutPanel1)
         FormBorderStyle = FormBorderStyle.FixedDialog
         Margin = New Padding(4, 3, 4, 3)
@@ -101,6 +94,6 @@ Partial Class Dialog1
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents OK_Button As System.Windows.Forms.Button
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
-    Friend WithEvents TextBox As RichTextBox
+    Friend WithEvents TextBox1 As RichTextBox
 
 End Class
